@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index,follow"/>
+        <Meta name=”description”   content="Hotel,Room Hotel"/>
+        <Meta name="author"  content="natia kasaburi" />
+        <Meta name =”keywords” content="delicious,Outstanding,Hotel"/>
+        <Meta property="og:title" content="Hotel"/>
+        <Meta property="og:description" content="ice cream"/>
+        <Meta property="og:type" content="website"/>
+        <title>Hotel</title>
+        <link rel="stylesheet" href="./booknow.css">
+        <link rel ="icon" href="./image/logo-ai.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="hotel">
+                    <div class="star">
+                        <i class="fa-regular fa-star fa-lg" style="color: #fcfdfe;"></i>
+                    </div>
+                    <p>Star Hotell</p>
+                </div>
+                <img src="./image/logo-ai.png" alt="icon" class="icon">
+                <div class="hamburger"><i class="fa-solid fa-bars fa-lg" style="color:rgb(3, 101, 176) "  id="hamburger"></i></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="./homs.html">Home</a></li>
+                    <li><a href="./rooms.html">Rooms</a></li>
+                    <li><a href="./hotel.html">Hotels</a></li>
+                    <li><a href="./bookedrooms.html">Booked Rooms</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div>
+                <div id="room-details">
+                    <div class="swiper">
+                        <div class="swiper-wrapper" id="swiper-wrapper"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <form id="registrationForm" novalidate>
+                    <div class="Reservation">
+                        <div class="conteiner"></div>
+                        <p id="top">Reservation</p>
+                        <div class="conteiner"></div>
+                    </div>
+                    <div>
+                        <h1 id="registration-title"></h1>
+                    </div>
+                    <div class="date-wrapper">
+                        <label for="checkin" class="label">Check-in
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="check-in is from 11:00"></i>
+                        </label><br />
+                        <input type="text" id="filter-checkin" name="checkin" required placeholder="check-in" />
+                        <div class="error-message" id="checkin-error" style="color:red; display:none;">გთხოვთ, აირჩიეთ Check-in თარიღი.</div>
+                    </div>
+                    <div class="date-wrapper">
+                        <label for="checkout" class="label">Check-out
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="check-out is from 12:00"></i>
+                        </label><br />
+                        <input type="text" id="filter-checkout" name="checkout" required placeholder="check-out" />
+                        <div class="error-message" id="checkout-error" style="color:red; display:none;">გთხოვთ, აირჩიეთ Check-out თარიღი.</div>
+                    </div>
+                    <div class="popup">
+                        <label for="customerName"  class="Customer" >Name</label><br />
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="customerName"
+                            placeholder="Please enter your name"
+                            required
+                            class="CustomerName"       />
+                        <div class="error-message" id="name-error" style="color:red; display:none;">
+                            გთხოვთ მიუთითოთ თქვენი სახელი
+                        </div><br/>
+                    </div>
+                    <div class="popup" >
+                        <label for="customerPhone"   class="customerPhone"> Phone</label><br />
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            name="customerPhone"
+                            placeholder="phone"
+                            required
+                            class="tel"  
+                            pattern="^\+995\d{9}$"
+                            />
+                        <div class="error-message" id="phone-error" style="color:red; display:none;">
+                           გთხოვთ მიუთით მობილურის ნომერი
+                        </div><br/>
+                    </div>
+                    <button type="submit" class="submit" disabled   >book now</button>
+                </form>
+                <div id="popup"> 
+                    <div class="popupwindov">
+                        <p id="popup-message"></p>
+                        <button id="popup-close">Close</button>
+                    </div>
+                </div>
+            </div> 
+            <article>
+                <div class="content">
+                    <div>
+                        <div class="boxse">
+                            <div class="Details"></div>
+                            <div>
+                                <p class="RoomDetails">Room Details</p>
+                            </div>
+                            <div class="Details"></div>
+                        </div>
+                        <div class="tab1">
+                            <p class="tabel">Table overview</p>
+                            <table  cellpadding="8"  ccellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px;">
+                                <tbody>
+                                    <tr class=" DoubleBed">
+                                        <td>  
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Double Bed
+                                        </td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Free Internet</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Free Newspaper</td>
+                                    </tr>
+                                    <tr class="square">
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            60 square meter</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Beach view</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            2 persons</td>
+                                    </tr>
+                                    <tr class="bed">
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Double Bed</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Free Internet</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Breakfast included</td>
+                                    </tr>
+                                    <tr class="private">
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Private Balcony</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Flat Screen TV</td>
+                                        <td>
+                                            <i class="fa-solid fa-circle-check" style="color: #74C0FC;"></i>
+                                            Jacuzzi</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="lorem">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nibh, cursus id euismod non, scelerisque nec nibh. Nam semper, ligula a rhoncus fermentum, libero lacus vulputate felis, id auctor mauris urna quis diam</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttoncontteiner">
+                    <div class="Overviewboxse">
+                        <div class="Overviewbox"></div>
+                        <div>
+                            <p class="Overview">Overview</p>
+                        </div>
+                        <div class="Overviewbox"></div>
+                    </div>
+                    <div class="tab">
+                        <button class="tab-btn active" 
+                                      data-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. In hendrerit risus arcu, in eleifend metus dapibus varius. Nulla dolor sapien, laoreet vel tincidunt non, egestas non justo. Phasellus et mattis lectus, et gravida urna.
+                                        foodDonec pretium sem non tincidunt iaculis. Nunc at pharetra eros, a varius leo. Mauris id hendrerit justo. Mauris egestas magna vitae nisi ultricies semper. Nam vitae suscipit magna. Nam et felis nulla. Ut nec magna tortor. Nulla dolor sapien, laoreet vel tincidunt non, egestas non justo."
+                                     data-img="https://hotelbooking.stepprojects.ge/images/tab/restaurant-01.jpg">Overview</button>
+                        <button class="tab-btn" 
+                                data-text="Phasellus sodales justo felis, a vestibulum risus mattis vitae. Aliquam vitae varius elit, non facilisis massa. Vestibulum luctus diam mollis gravida bibendum. Aliquam mattis velit dolor, sit amet semper erat auctor vel. Integer auctor in dui ac vehicula. Integer fermentum nunc ut arcu feugiat, nec placerat nunc tincidunt. Pellentesque in massa eu augue placerat cursus sed quis magna.
+                                      fermentum nunc ut arcu feugiat, nec placerat nunc tincidunt. Pellentesque in massa eu augue placerat cursus sed quis magna.
+                                    ">Facilities</button>
+                        <button class="tab-btn" data-text="Aa vestibulum risus mattis vitae. Aliquam vitae varius elit, non facilisis massa. Vestibulum luctus diam mollis gravida bibendum. Aliquam mattis velit dolor, sit amet semper erat auctor vel. Integer auctor in dui ac vehicula. Integer fermentum nunc ut arcu feugiat, nec placerat nunc tincidunt. Pellentesque in massa eu augue placerat cursus sed quis magna.
+                                ">Extra</button>
+                    </div>
+                    <div id="displayArea">
+                        <img id="displayImg" src="./image/food.jpg" alt="Overview Image">
+                        <div id="displayText">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. In hendrerit risus arcu, in eleifend metus dapibus varius. Nulla dolor sapien, laoreet vel tincidunt non, egestas non justo. Phasellus et mattis lectus, et gravida urna.
+                                foodDonec pretium sem non tincidunt iaculis. Nunc at pharetra eros, a varius leo. Mauris id hendrerit justo. Mauris egestas magna vitae nisi ultricies semper. Nam vitae suscipit magna. Nam et felis nulla. Ut nec magna tortor. Nulla dolor sapien, laoreet vel tincidunt non, egestas non justo
+                        </div>                     
+                    </div>
+                </div>
+            </article>
+            <div class="other">
+               <div class="roombox"></div>
+               <div class="otherrooms"><p>Other rooms</p></div>
+               <div class="roombox"></div>
+            </div>
+            <div id="roomsContainer" ></div>
+        </main>
+        <footer>
+            <div class="content1">
+                <p>© 2023 IT Academy Step All; Rights Reserved</p>
+                <div class="content3">
+                    <div id="content" class="content2">
+                       <a href="#top"><i class="fa-solid fa-arrow-up fa-sm" style="color:aqua" id="arrow"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="./booknow.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    </body>
+</html>

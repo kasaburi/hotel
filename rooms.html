@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index,follow"/>
+        <Meta name=”description”   content="Hotel,Room Hotel"/>
+        <Meta name="author"  content="natia kasaburi" />
+        <Meta name =”keywords” content="delicious,Outstanding,Hotel"/>
+        <Meta property="og:title" content="Hotel"/>
+        <Meta property="og:description" content="ice cream"/>
+        <Meta property="og:type" content="website"/>
+        <title>Hotel</title>
+        <link rel="stylesheet" href="./rooms.css">
+        <link rel ="icon" href="./image/logo-ai.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.6.1/dist/nouislider.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="hotel">
+                    <div class="star">
+                        <i class="fa-regular fa-star fa-lg" style="color: #fcfdfe;"></i>
+                    </div>
+                    <p>Star Hotell</p>
+                </div>
+                <img src="./image/logo-ai.png" alt="icon" class="icon">
+                <div class="hamburger"><i class="fa-solid fa-bars fa-lg" style="color:rgb(3, 101, 176) "  id="hamburger"></i></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="./homs.html">Home</a></li>
+                    <li><a href="./rooms.html">Rooms</a></li>
+                    <li><a href="./hotel.html">Hotels</a></li>
+                    <li><a href="./bookedrooms.html">Booked Rooms</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="section">
+                <div id="roomTypeContainer" ></div><hr />
+                <form id="filter-form">
+                    <div class="price">
+                        <div class="price-label">Price Per Night</div>
+                        <div id="price-slider"></div>
+                        <div  id="filter-price-to"  class="price-boxes">
+                            <span class="price-value" id="min-price">0</span>
+                            <span class="dash">-</span>
+                            <span class="price-value" id="max-price">1000</span>
+                        </div>
+                    </div>
+                    <div class="type">
+                        <label for="filter-room-type">  Room type 
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ აირჩიოთ ოთახის ტიპი."></i>
+                        </label>
+                        <select id="filter-room-type">
+                            <option value="">select a room</option>
+                            <option value="1">Single Room</option>
+                            <option value="2">Double Room</option>
+                            <option value="3">Deluxe Room</option>
+                        </select>
+                    </div>
+                    <div class="check-in">
+                        <label for="filter-checkin">Check-in
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ მიუთითეთ ჩასვლის თარიღი."></i>
+                        </label>
+                        <div class="date-wrapper">
+                            <input type="data" id="filter-checkin" placeholder="check-in">
+                        </div>
+                    </div>
+                    <div class="check-out">
+                        <label for="filter-checkout">Check-out
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ მიუთითეთ გასვლის თარიღი."></i>
+                        </label>
+                        <div class="date-wrapper">
+                            <input type="text" id="filter-checkout" placeholder="check-out">
+                        </div>
+                    </div>
+                    <div class="guests">
+                        <div class="guests-wrapper">
+                            <label for="guestsInput" class="label-guests">Guests 
+                                 <i class="fa-solid fa-user-plus fa-sm" style="color: #74C0FC;"></i> 
+                            </label>
+                            <input type="text" id="guestsInput" readonly value="1" onclick="toggleGuestPopup()">
+                        </div>
+                        <div id="guestPopup" class="guest-popup">
+                            <label for="adultSelect">Adults
+                                <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="აირჩიეთ სტუმრების რაოდენობა."></i>
+                            </label>
+                            <select id="adultSelect">
+                                <option value="1">1 adult</option>
+                                <option value="2">2 adults</option>
+                                <option value="3">3 adults</option>
+                                <option value="4">4 adults</option>
+                                <option value="5">5 adults</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="filter-btn">APPLY FiLTER</button>
+                        <button type="button" id="reset-btn">RESET</button>
+                    </div>
+                </form><hr />   
+            </section>
+            <article>
+                <div id="roomsContainer"></div>
+                <div id="roomResults"></div>
+            </article>
+        </main>
+         <footer>
+            <div class="content1">
+                <p>© 2023 IT Academy Step All; Rights Reserved</p>
+                <div class="content3">
+                    <div class="content2">
+                       <a href="#section"><i class="fa-solid fa-arrow-up fa-sm" style="color:aqua"  id="arrow"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/nouislider@15.6.1/dist/nouislider.min.js"></script>
+        <script src="./rooms.js"></script>
+    </body>
+</html>
