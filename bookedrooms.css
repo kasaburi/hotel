@@ -1,0 +1,640 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style-type: none; 
+    text-decoration: none;
+    box-sizing: border-box; 
+    overflow: visible;
+    font-family: font;
+
+
+}
+@font-face{
+    font-family: font;
+    src: url(./googlefont/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
+}
+
+
+.icon{
+    height: 10vh;
+    width: 5vw;
+    object-fit: contain;
+}
+
+
+body {
+
+width: 100%;
+max-width: 100vw;
+
+}
+
+
+
+ 
+.navbar {
+  display: flex;
+  min-width: 100%;
+  position: fixed;
+  align-items: center;
+  gap:20px;
+  padding: 15px;
+  padding-left: 10%;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 3;
+
+}
+
+.nav-links {
+    display: flex; 
+    font-size: 20px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;   
+    height:5vh;  
+    width: 40vw; 
+    list-style: none;
+    color: black;
+    gap: 20px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(124, 124, 124, 0.337);
+    height: 10vh;
+
+}
+
+
+
+
+.nav-links li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+
+
+
+.nav-links li a:hover {
+  color: #1e5d70;
+}
+
+
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  flex-direction: column;
+  gap: 30px;
+  display: none;
+}
+
+.nav-overlay a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}  
+
+
+
+
+.hamburger {
+  display: none;
+  min-height: 10vh;
+  font-size: 28px;
+  cursor: pointer;
+}
+ 
+
+main{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    min-height: 100vh;
+    height: auto;
+    margin-top: 5%;
+    
+
+ 
+
+}
+header{
+     height: 7vh;
+}
+   
+
+.star{
+  display: none;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  overflow: visible;
+  background-color: rgb(3, 101, 176);
+}
+
+
+.hotel{
+  display: none;
+}
+
+
+
+#city{ 
+    display: flex;
+    justify-content: flex-end;
+    height: 7vh;
+    width: 20vw;
+}
+
+.inbox{
+    display: flex;
+
+}
+
+
+.data-city{
+    width: 4vw;
+    height: 6vh;
+    border:none;
+    background-color: rgb(31, 140, 223, 0.696) ;
+    border-radius: 10%;
+    text-align: center;
+    padding-top: 15px;
+   color: white;
+}
+
+.city-item{
+    width: 4vw;
+    height: 6vh;
+    text-align: center;
+    padding-top: 15px;
+    color: #aaa9a9;
+    border: none;
+}
+
+
+
+section{
+     
+      background-color: #f8f9f622;
+}
+
+
+
+
+
+
+
+#status{
+  padding-left: 50%;
+  color: #4d4c4c;
+}
+
+
+
+
+.roomprice{
+    color: #1e5d70;
+}
+
+.booked{
+    border:none;
+    width: 70px;
+    height: 26px;
+    font-weight: bolder;
+    color: white;
+    background-color: #1e5d70;
+    padding-top: 10px;
+    border-radius: 16px;
+    font-size: 12px;
+    text-align: center;
+}
+ 
+
+
+
+
+ table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: none;
+    border: none;
+    color: #4d4c4c; 
+    
+
+  } 
+
+
+  th {
+     border: none;
+     border-bottom: 2px solid #aaa9a964 ;
+     background-color: #f8f9f622;
+     height: 5vh;
+  
+  
+  }
+  td {
+    border-right: none;  
+    border-left: none;
+    border-bottom:1px solid #aaa9a964;
+    padding: 6px 8px;
+    vertical-align: middle;
+      background-color: #f8f9f622;
+
+    
+  } 
+  td.hotel {
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  td.hotel > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  td.hotel img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  td.hotel > div > div {
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+  }
+
+
+.hotelbox{
+  width: 15vw;
+  height: 10vh;
+
+}
+.hotelname{
+  min-height: 90px;
+}
+
+.hotelcity{
+    color: #1e5d70;
+    border: 1px solid grey;
+}
+
+.cancel{
+    width: 8vw;
+    height: 5vh;
+    border: none;
+    background-color: #1e5d70;
+    color: #fff;
+    font-weight: bolder;
+   
+}
+.cancel:hover{
+     box-shadow: 0 0 15px 10px #1e5d705b ;
+      background-color: #1e5d705b ;
+}
+
+
+#cityitem {
+    border: none;
+    color: #fff;
+    background-color: rgb(31, 140, 223, 0.696);
+}
+
+#all:hover{
+    background-color: #4d4d4d1e;
+}
+
+#notification{
+        position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1000;
+}
+
+
+
+
+
+
+
+
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-box {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.popup-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  
+}
+
+.popup-btn.confirm { background: #4caf50; color: white; }
+.popup-btn.cancel { background: #f44336; color: white; }
+
+
+
+
+.table-responsive {
+  max-width: 95vw; 
+  margin: 0 auto;   
+}
+
+
+
+
+
+
+  .hotelcity {
+    border: none;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 701px) and (max-width: 1600px){
+
+
+  
+.table-responsive {
+
+  overflow-x: auto; 
+}
+
+
+
+
+}
+ 
+
+
+
+
+
+
+
+@media screen and (max-width: 700px) {
+
+
+  .navbar {
+    position: fixed;
+    right: 0;
+    justify-content: space-around;
+    max-height: 10vh;
+    gap: 5%;
+    width: 90vw;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 30px;
+    padding-top: 30px; 
+    min-height: 80px;
+    width: 50px; 
+  }
+
+  .nav-links {
+    display: none;
+    
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    padding-right: 5%;
+  
+  }
+
+  .nav-links li {
+    padding: 10px 0;
+    color: white;
+  }
+
+  .nav-overlay.active {
+    display: flex;
+    padding-bottom: 15%; 
+    min-height: 55vh;
+  }
+
+  .star {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    min-height: 50px;
+  }
+
+  .hotelcity {
+    border: none;
+
+  }
+
+  .tdhotel {
+    min-width: 25vw;
+    margin: 10px;
+    padding-top: 5px;
+ 
+  
+
+  }
+
+  .hotel {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    width: 100%;
+    gap: 5%;
+ 
+       
+  }
+
+
+  .icon {
+    display: none;
+  }
+
+  .hotelbox {
+    gap: 20px;
+    width: 100%;
+
+  }
+
+
+
+
+  .roomname,
+  .hotelname {
+    min-height: 40px;
+    max-width: 90px;
+    font-size: 10px;
+    margin-top: 10px;
+    text-align: center;
+    white-space: normal;       
+    word-wrap: break-word;       
+    overflow: hidden;            
+    text-overflow: ellipsis;     
+    box-sizing: border-box;
+  }
+
+.roomstyle{
+  min-width: 15vw;
+   min-height: 19vh;
+    flex-direction: column;
+    align-content: flex-start;
+  
+}
+
+.roombox{
+  min-height: 5vh;
+
+}
+.imgroom{
+padding-bottom: 8px;
+  min-height: 8vh;
+}
+
+  #cityitem {
+    width: 15vw;
+    max-height: 5vh;
+  }
+
+  table td {
+    min-height: 15vh;
+    vertical-align: middle; 
+  }
+
+  .hotell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .Customer {
+    width: 15vw;
+  }
+
+  .booked {
+    width: 60px;
+    font-size: 12px;
+  }
+
+  th, td {
+    text-align: left;
+    max-width: 80px; 
+    white-space: normal;
+    overflow: hidden;
+    vertical-align: middle; 
+  }
+
+
+
+  .cancel {
+    width: 80px;
+    font-size: 14px;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; 
+    margin: 0;
+  }
+
+  main {
+    margin-top: 15%;
+    width: 95vw;
+    padding: 0px;
+  }
+
+  .table-responsive {
+    width: 90vw;
+     overflow-x: scroll;   
+   }
+
+  .table-responsive table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+     overflow-x: scroll;    
+  } 
+
+
+#status{
+  padding-left: 40%;
+}
+
+  .table-responsive table th,
+  .table-responsive table td {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+}
+ 
