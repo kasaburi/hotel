@@ -920,13 +920,17 @@ img{
   width: 100%;
 }
 
-#read{
-  min-height: 40vh;
+article{
+  justify-content: center;
+  max-height: 40vh;
 }
-
+.log{
+  padding: 10px;
+}
 
 header{
   height: 5vh;
+
 }
 main{
   padding-top: 55px;
@@ -1011,6 +1015,14 @@ main{
   max-height: 40px;
   font-size: 16px;
 }
+#btnLogin{
+   width: 180px;
+}
+
+
+#btnRegister{
+  width: 180px;
+}
 
 
 }
@@ -1068,7 +1080,9 @@ body{
     
   }
 main{
+  width: 100%;
   margin-top: 10%;
+
 }
   .nav-links {
     display: none;
@@ -1095,7 +1109,8 @@ main{
 article{
   padding: 7%;
   width: 100%;
-  height: 55vh;
+  max-height: 40vh;
+
 }
 
 
@@ -1110,6 +1125,7 @@ h1{
 .box{
   display: flex;
   width: 90vw;
+
 }
 .p1{
  display: none;
@@ -1275,19 +1291,6 @@ h3{
      min-height: 8px;
   width: 60px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1559,7 +1562,7 @@ h3{
 
 
 .log{
-  flex-direction: column;
+  flex-wrap: wrap;
   gap:4px;
 }
 
