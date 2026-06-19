@@ -310,7 +310,6 @@ article{
     font-size: 25px;
     color: rgb(245, 245, 248);
 
-
 }
 
 .box{
@@ -324,7 +323,6 @@ article{
 
 h1{
     font-size: 50px;
-
     
 }
 .p1{
@@ -1333,7 +1331,6 @@ body{
     display: block;
     padding-top: 25px;
     width: 55px;
-
  
     
   }
@@ -1413,7 +1410,6 @@ h1{
 .box{
   display: flex;
   width: 90vw;
-
 }
 .p1{
  display: none;

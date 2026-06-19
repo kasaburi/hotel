@@ -382,7 +382,6 @@ margin-bottom: 20px;
      font-size: 18px;
   color:black;
   border: 1px solid rgba(128, 128, 128, 0.407);
-
 }
 
 
@@ -501,7 +500,6 @@ z-index:6;
     padding: 7px;
     background-color: rgba(6, 6, 6, 0.863);
     height: 15vh;
-
 
   }
 
@@ -701,7 +699,6 @@ border-bottom:1px solid rgba(177, 177, 177, 0.167);
   margin-top: 5%;
 
 }
-
 
 
 #displayImg {
@@ -934,7 +931,6 @@ border-bottom:1px solid rgba(177, 177, 177, 0.167);
   list-style: none;
   z-index: 1;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
 }
 
 .dropdown-list{
@@ -1915,7 +1911,6 @@ main{
 
 .date-wrapper{
     width: 75vw;
-
   
 }
 

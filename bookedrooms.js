@@ -145,8 +145,13 @@ function showConfirmPopup(message, subMessage, bookingId, callback) {
         <p class="popup-message">${message}</p>
         <p class="popup-sub">${subMessage}</p>
         <div class="popup-buttons">
+<<<<<<< HEAD
           <button class="popup-btn confirm">ok</button>
           <button class="popup-btn cancel">cancel</button>
+=======
+          <button class="popup-btn confirm">დადასტურება</button>
+          <button class="popup-btn cancel">გაუქმება</button>
+>>>>>>> 7292ff44cded6a19a912f7aa40f2a18c456778cb
         </div>
       </div>
       <p class="popup-result" style="margin-top:10px; font-weight:bold; cursor:pointer; display:none;">გასვლა</p>
