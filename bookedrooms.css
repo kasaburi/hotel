@@ -123,9 +123,7 @@ main{
     min-height: 100vh;
     height: auto;
     margin-top: 5%;
-    
-
- 
+  
 
 }
 header{
@@ -227,6 +225,7 @@ section{
  table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: none;
     border: none;
     color: #4d4c4c; 
     
@@ -291,8 +290,12 @@ section{
     border: 1px solid grey;
 }
 
+
+
+
+
 .cancel{
-    width: 8vw;
+    width: 5vw;
     height: 5vh;
     border: none;
     background-color: #1e5d70;
@@ -405,11 +408,13 @@ section{
 
 
 
+.Customer  {
+  max-width: 5vw  !important;
+}
 
-
-
-
-
+.ucnobi{
+  max-width: 10vw;
+}
 
 
 
@@ -420,13 +425,17 @@ section{
 @media screen and (min-width: 701px) and (max-width: 1600px){
 
 
-  
+  main{
+    padding-top: 40px;
+  }
 .table-responsive {
 
   overflow-x: auto; 
 }
 
-
+.cancel{
+  min-width: 100px;
+}
 
 
 }
@@ -439,6 +448,10 @@ section{
 
 
 @media screen and (max-width: 700px) {
+
+  .ucnobi{
+    max-width: 15vw;
+  }
 
 
   .navbar {
@@ -460,12 +473,14 @@ section{
 
   .nav-links {
     display: none;
+    
   }
 
   .nav-links.active {
     display: flex;
     flex-direction: column;
     padding-right: 5%;
+  
   }
 
   .nav-links li {
@@ -475,8 +490,7 @@ section{
 
   .nav-overlay.active {
     display: flex;
-    padding-left: 25%;
-    padding-bottom: 15%;
+    padding-bottom: 15%; 
     min-height: 55vh;
   }
 
@@ -490,12 +504,14 @@ section{
 
   .hotelcity {
     border: none;
+
   }
 
   .tdhotel {
     min-width: 25vw;
     margin: 10px;
     padding-top: 5px;
+ 
   
 
   }
@@ -506,12 +522,10 @@ section{
     font-size: 16px;
     width: 100%;
     gap: 5%;
+ 
        
   }
-  .img{
-    padding-bottom: 8px;
 
-  }
 
   .icon {
     display: none;
@@ -540,8 +554,26 @@ section{
     box-sizing: border-box;
   }
 
+.roomstyle{
+  min-width: 15vw;
+   min-height: 19vh;
+    flex-direction: column;
+    align-content: flex-start;
+  
+}
+
+.roombox{
+  min-height: 5vh;
+
+}
+.imgroom{
+padding-bottom: 8px;
+  min-height: 8vh;
+}
+
   #cityitem {
-    width: 12vw;
+    width: 15vw;
+    max-height: 5vh;
   }
 
   table td {
@@ -572,11 +604,7 @@ section{
     vertical-align: middle; 
   }
 
-  .roomstyle {
-    flex-direction: column;
-    align-content: space-around;
-    min-height: 22vh;
-  }
+
 
   .cancel {
     width: 80px;
@@ -596,19 +624,41 @@ section{
     margin-top: 15%;
     width: 95vw;
     padding: 0px;
+  
   }
 
   .table-responsive {
     width: 90vw;
-     overflow-x: scroll;   
-  }
+     overflow-x: auto;   
+   }
 
   .table-responsive table {
     width: 100%;
     min-width: 600px;
     border-collapse: collapse;
      overflow-x: scroll;    
-  }
+  } 
+
+
+
+
+.ucnobi{
+
+  min-width: 30vw;
+}
+
+
+
+
+
+
+
+
+
+
+#status{
+  padding-left: 40%;
+}
 
   .table-responsive table th,
   .table-responsive table td {

@@ -61,21 +61,14 @@ header{
 
 
 
-.close{
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 10%;
-  height: 5vh;
-  padding-top: 20px;
-}
 
 #btnClose{
-  background-color:#206073 ;
-  width: 10vw;
-  height: 30px;
-  color: aliceblue;
-  border-radius: 7px;
+  display: flex;
   border: none;
+  justify-content: flex-end;
+  background: none;
+  font-size:18px;
+  width: 100%;
 
 }
 
@@ -83,25 +76,29 @@ header{
    border-radius: 7px;
     color: #fbf4f4;
     border: none;
-    background-color: rgb(198, 17, 161);
+    background-color: #4a80d7;
     font-size: 16px;
     width: 150px;
     height: 40px;
-  position: absolute;
-  right:  40px;
-  top: 150px;
+
 }
 
    
 
 #btnLogin:hover{
-box-shadow: 0 0 15px 5px rgba(220, 48, 186, 0.459);
-background-color: rgba(220, 48, 186, 0.459);
+background-color: #406eb8;
 }
 
 
 
 
+.log{
+  display: flex;
+  justify-content: center;
+  gap:10%;
+  width: 40vw;
+
+}
 
 
 
@@ -109,19 +106,16 @@ background-color: rgba(220, 48, 186, 0.459);
    border-radius: 7px;
     color: #fbf4f4;
     border: none;
-    background-color: rgb(198, 17, 161);
+    background-color: #4a80d7;
     font-size: 16px;
     width: 150px;
     height: 40px;
-  position: absolute;
-  right:  40px;
-  top: 200px;
+
 
 }
 
 #btnRegister:hover{
-  box-shadow: 0 0 15px 5px rgba(220, 48, 186, 0.459);
-background-color: rgba(220, 48, 186, 0.459);
+background-color: #406eb8;
 }
 
 
@@ -180,24 +174,6 @@ background-color: rgba(220, 48, 186, 0.459);
       border: none;
       width: 100%;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -325,13 +301,15 @@ article{
      display: flex;
     flex-direction: column;
     align-items: center;
+    align-items: center;
     width: 100%;
-    background-image:url(./image/sinsi-pool-7536-hor-feat.webp);
+    background-image:url(./image/hotel.jpg);
     background-size:cover;
     background-position: center;
     height: 60vh;
     font-size: 25px;
     color: rgb(245, 245, 248);
+
 
 }
 
@@ -346,13 +324,14 @@ article{
 
 h1{
     font-size: 50px;
+
     
 }
 .p1{
    display: block;
     height: 5vh;
     z-index: 2;
-    /* padding-top: 72px; */
+  
   
 }
 h2{
@@ -376,12 +355,12 @@ h2{
     border: none;
     background-color: rgb(198, 17, 161);
     font-size: 20px;
-    width: 10vw;
+    width: 15vw;
     height: 7vh;
 }
 .button1:hover{
-box-shadow: 0 0 15px 5px rgba(220, 48, 186, 0.459);
-background-color: rgba(220, 48, 186, 0.459);
+box-shadow: 0 0 15px 5px rgba(220, 48, 186, 0.24);
+background-color: rgb(167, 14, 136);
 }
 .tegi{
     color: white;
@@ -399,7 +378,7 @@ background-color: rgba(220, 48, 186, 0.459);
 }
 .one{
     width: 32vw;
-    border: 1px solid rgba(154, 153, 153, 0.527);
+    border: 1px solid rgba(154, 153, 153, 0.311);
 }
 #section{
     display: flex;
@@ -433,6 +412,15 @@ background-color: rgba(220, 48, 186, 0.459);
 
 
 }
+
+
+.cardbody:hover{
+box-shadow: 0 2px 6px rgba(45, 43, 43, 0.08);
+border: none;
+
+
+}
+
 .text{
     display: flex;
     flex-direction: column;
@@ -464,9 +452,11 @@ img{
     background-color: rgba(52, 180, 165, 0.441);
     height: 8vh;
     border-radius: 8px;
+    width: 20vw;
     border: none;
     font-size: 18px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 70px;
 }
 .book{
     color: white;
@@ -522,8 +512,6 @@ footer{
     border: none; 
     
 }
-
-
 
   #glass1 {
   color: #74C0FC;
@@ -730,7 +718,6 @@ footer{
 
 
 
-
  .content2:hover{
     background-color:rgba(31, 140, 223, 0.696) ;
     border: none; 
@@ -783,10 +770,29 @@ footer{
 
 
 
+.card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+ 
+}
+
+
+.card:hover{
+box-shadow: 0 2px 6px rgba(45, 43, 43, 0.08);
+border: none;
+}
 
 
 
-@media screen and (min-width: 1201px) and (max-width: 1400px){
+
+
+
+
+
+
+@media screen and (min-width: 1201px) and (max-width: 1500px){
 
 
 
@@ -907,7 +913,7 @@ img{
 }
 .card{
   width: 37vw;
-  min-height: 22vh;
+  max-height: 40vh;
 
 }
 
@@ -932,7 +938,7 @@ main{
   min-height: 150vh;
 }
 .cardbody{
-  min-height: 5vh;
+  max-height: 10vh;
 }
 .name{
   width: 30vw;
@@ -1002,20 +1008,6 @@ main{
 
 
 
-#btnLogin{
-  position: relative;
-  top: 12px;
-  left: 1px;
-
-}
-
-
-#btnRegister{
-  position: relative;
-  top: 20px;
-  left: 1px;
-}
-
 .button1{
   width: 150px;
   max-height: 40px;
@@ -1038,7 +1030,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 250vh;
+  max-height: 200vh;
   width: 100%;
 }
 
@@ -1058,7 +1050,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
+  width: 60px;
   min-height: 60px;
   
 }
@@ -1073,7 +1065,7 @@ body{
   .hamburger {
     display: block;
     position: relative;
-    top: 20px;
+    top: 30px;
  
     
   }
@@ -1136,18 +1128,17 @@ h1{
 }
 
 
-#btnLogin{
-  position: relative;
-  top: 12px;
-  left: 1px;
+.log{
+   width: 280px;
+}
 
+#btnLogin{
+   width: 220px;
 }
 
 
 #btnRegister{
-  position: relative;
-  top: 20px;
-  left: 1px;
+  width: 220px;
 }
 
 .box2{
@@ -1156,21 +1147,23 @@ h1{
 }
 #section{
   width: 80%;
-  min-height: 527vh;
+  min-height: 425vh;
 }
 
 
 h2{
-  font-size: 24px;
+  font-size: 22px;
+  text-align: center;
+
 }
 
 .img{
-  min-height:50vh;
+  min-height:40vh;
 }
 
 
 .card{
-  min-height: 65vh;
+  min-height: 55vh;
   width: 100%;
   padding: 0;
   margin: 0;
@@ -1240,7 +1233,7 @@ h3{
 
 }
 .glass{
- min-height: 8px;
+ max-height: 60px;
   width: 70px;
   padding: 0;
   margin: 0;
@@ -1252,7 +1245,7 @@ h3{
 
 }
 .card1{
-  min-height: 8px;
+ max-height: 60px;
   width: 70px;
 }
 
@@ -1262,7 +1255,7 @@ h3{
 
 }
 .utensils{
-   min-height: 8px;
+  max-height: 60px;
   width: 70px;
 }
 
@@ -1271,7 +1264,7 @@ h3{
   width: 45vw;
 }
 .droplet{
-  min-height: 8px;
+  max-height: 60px;
   width: 70px;
 }
 .content1{
@@ -1282,7 +1275,7 @@ h3{
 
 .content2{
      min-height: 8px;
-  width: 70px;
+  width: 60px;
 }
 
 
@@ -1329,9 +1322,9 @@ body{
   display: flex;
   position: fixed;
   right:0px;
-  justify-content: space-around;
+  justify-content: space-between;
   max-height: 10vh;
-  width: 100%;
+  width:100%;
 
 
 }
@@ -1340,20 +1333,24 @@ body{
     display: block;
     padding-top: 25px;
     width: 55px;
+
  
     
   }
 
 
- 
+ .button{
+  width: 35vw;
+ }
 
 
 .star{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  min-height: 50px; 
+ min-width: 40px;
+  min-height:40px;
+  
 
   
 } 
@@ -1363,7 +1360,7 @@ body{
 
 
 header{
-  height: 8vh;
+  height: 50px;
 }
 
   .hotel{
@@ -1375,6 +1372,8 @@ header{
   }
 main{
   margin-top: 4%;
+  padding: 0;
+  width: 100%;
 }
   .nav-links {
     display: none;
@@ -1400,10 +1399,12 @@ main{
 
   }
 article{
-  padding: 7%;
-  width: 100%;
+  min-width: 100%;
+ justify-content: flex-start;
+ padding-top: 10px;
   margin: 0;
-  max-height: 50vh;
+  max-height: 30vh;
+
 }
 h1{
   font-size: 35px;
@@ -1412,13 +1413,14 @@ h1{
 .box{
   display: flex;
   width: 90vw;
+
 }
 .p1{
  display: none;
 }
 .p2{
  font:bold;
- font-size: 25px;
+ font-size: 18px;
 }
 
 .button1{
@@ -1445,17 +1447,20 @@ h1{
  
 }
 h2{
-  font-size: 20px;
+  font-size: 17px;
+  text-align: center;
+
 }
 #section{
  min-height: 340vh;
   width: auto;
+  padding: 0;
+  gap: 10px;
 }
 
 .card{
   width: 90%;
-  min-height: 35vh;
-  height: auto;
+ 
 }
 .cardbody{
   justify-content: space-around;
@@ -1507,9 +1512,10 @@ h3{
 
 }
 .glass{
-  min-height: 10px;
-  width: 70px;
+   max-height: 60px;
+  width: 60px;
   padding-top: 5%;
+
 }
 
 .conteiner1{
@@ -1518,8 +1524,8 @@ h3{
 
 }
 .card1{
-   min-height: 10px;
-  width: 70px;
+   max-height: 60px;
+  width: 60px;
 }
 
 .conteiner2{
@@ -1528,8 +1534,8 @@ h3{
 
 }
 .utensils{
-   min-height: 10px;
-  width: 70px;
+   max-height: 60px;
+  width: 60px;
 }
 
 .conteiner3{
@@ -1537,8 +1543,9 @@ h3{
   width: 80vw;
 }
 .droplet{
-  min-height: 10px;
-  width: 70px;
+  max-height: 60px;
+  width: 60px;
+
 }
 .content1{
   width: 100%;
@@ -1547,7 +1554,7 @@ h3{
 }
 
 .content2{
-  min-height: 10px;
+   max-height: 60px;
   width: 60px;
   padding: 0;
 }
@@ -1555,28 +1562,33 @@ h3{
 
 
 
-
+.log{
+  flex-direction: column;
+  gap:4px;
+}
 
 
 #btnLogin{
-  position: relative;
-  top:10px;
-  right: 1px;
-   width: 120px;
-   font-size: 14px;
+
+   width: 110px;
+   font-size: 12px;
+   height: 30px;
+   border-radius: 3px;
 }
 
-
+.starhotel{
+  font-size: 14px;
+}
 #btnRegister{
-  position: relative;
-  top:15px;
-  right: 1px;
-   width: 120px;
-   font-size: 14px;
+     width: 110px;
+   font-size: 12px;
+   height: 30px;
+   border-radius: 3px;
+
 }
 
-#btnClose{
-  width: 60px;
-}
+
+
+
 
 }

@@ -7,7 +7,7 @@ overlay.classList.add("nav-overlay");
 
 
 overlay.innerHTML = `
-  <a href="./homs.html">Home</a>
+  <a href="./index.html">Home</a>
   <a href="./rooms.html">Rooms</a>
   <a href="./hotel.html">Hotels</a>
   <a href="./bookedrooms.html">Booked Rooms</a>
@@ -56,7 +56,7 @@ const BOOKINGS_API = "https://hotelbooking.stepprojects.ge/api/Booking";
 
 async function fetchData(url) {
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`მონაცემების ჩატვირთვა ვერ მოხერხდა: ${res.status}`);
+  if (!res.ok) throw new Error(`Failed to load data : ${res.status}`);
   return res.json();
 }
 
@@ -92,7 +92,7 @@ function renderRoomCell(room) {
   const roomImage = room.images?.[0]?.source ?? 'https://via.placeholder.com/80x60?text=No+Image';
   return `
     <div class="roomstyle" style="display:flex; align-items:center; gap:10px; max-width:300px;">
-      <img src="${roomImage}" alt="${room.name}"   style="width:80px; height:60px; object-fit:cover; border-radius:6px;">
+      <img src="${roomImage}" alt="${room.name}" class="imgroom"  style="width:80px; height:60px; object-fit:cover; border-radius:6px;">
       <div class="roombox">
         <strong class="roomname" >${room.name ?? "-"}</strong><br>
         <small class=roomprice>${formatPrice(room.pricePerNight ?? room.price)}</small>
@@ -145,8 +145,8 @@ function showConfirmPopup(message, subMessage, bookingId, callback) {
         <p class="popup-message">${message}</p>
         <p class="popup-sub">${subMessage}</p>
         <div class="popup-buttons">
-          <button class="popup-btn confirm">დადასტურება</button>
-          <button class="popup-btn cancel">გაუქმება</button>
+          <button class="popup-btn confirm">ok</button>
+          <button class="popup-btn cancel">cancel</button>
         </div>
       </div>
       <p class="popup-result" style="margin-top:10px; font-weight:bold; cursor:pointer; display:none;">გასვლა</p>
@@ -170,16 +170,18 @@ function showConfirmPopup(message, subMessage, bookingId, callback) {
   overlay.querySelector(".confirm").addEventListener("click", async () => {
     try {
       const res = await fetch(`${BOOKINGS_API}/${bookingId}`, { method: "DELETE" });
-      if (!res.ok) throw new Error(`მოთხოვნა ვერ შესრულდა: ${res.status}`);
+      if (!res.ok) throw new Error(`The request could not be fulfilled: ${res.status}`);
 
-      showResult(`ჯავშანი წაიშალა! Booking ID: ${bookingId}. დაჭირე გასასვლელად`, "green");
+      showResult(`The armor has been removed.! Booking ID: ${bookingId}. back`, "green");
       callback && callback(true);
     } catch (error) {
-      showResult("შეცდომა ჯავშნის წაშლისას: " + error.message + ". დაჭირე გასასვლელად", "red");
+      showResult("Error deleting reservation: " + error.message + ". back", "red");
     }
   });
   overlay.querySelector(".cancel").addEventListener("click", () => {
-    showResult("ჯავშანი არ წაიშალა. დაჭირე გასასვლელად", "orange");
+    showResult('The armor was not removed <span style="color:green">back</span>','orange'
+);
+
     callback && callback(false);
   });
 }
@@ -187,12 +189,12 @@ function showConfirmPopup(message, subMessage, bookingId, callback) {
 
 function cancelBooking(bookingId) {
   if (!bookingId) {
-    alert("ჯავშნის ID არ არის მითითებული.");
+    alert("No booking ID is specified.");
     return;
   }
 
   showConfirmPopup(
-    "გინდა ნამდვილად გააუქმო ეს ჯავშანი?",
+    "Do you really want to cancel this reservation?",
     `Booking ID: ${bookingId}`,
     bookingId,
     (confirmed) => {
@@ -211,7 +213,7 @@ function cancelBooking(bookingId) {
 
 async function loadBookings(filterCity = null) {
   try {
-    statusDiv.textContent = "იტვირთება...";
+    statusDiv.textContent = "loading...";
 
     const [hotels, rooms, bookings] = await Promise.all([
       fetchData(HOTELS_API),
@@ -256,7 +258,7 @@ async function loadBookings(filterCity = null) {
         <tr>
           <td class="tdhotel">${renderHotelCell(hotel)}</td>
           <td>${renderRoomCell(room)}</td>
-          <td >${booking.customerName ?? "უცნობი"}</td>
+          <td class='ucnobi'>${booking.customerName ?? "უცნობი"}</td>
           <td>
             <div  class="booked"  >${booking.isConfirmed ? "Booked" : "Booked"}</div>
           </td>
@@ -267,7 +269,7 @@ async function loadBookings(filterCity = null) {
             <button 
               onclick="cancelBooking(${booking.id})" 
               class="cancel">
-               Cancel Booking
+               Cancel 
             </button>
           </td>
         </tr>
@@ -275,15 +277,15 @@ async function loadBookings(filterCity = null) {
     }
 
     if (!hasData) {
-      tableHTML += `<tr><td colspan="8" style="text-align:center;">მონაცემები არ მოიძებნა</td></tr>`;
+      tableHTML += `<tr><td colspan="8" style="text-align:center;">No data found.</td></tr>`;
     }
 
     tableHTML += "</tbody></table>";
     container.innerHTML = tableHTML;
     statusDiv.textContent = "";
   } catch (error) {
-    console.error(" შეცდომა ბუქინგების ჩატვირთვისას:", error);
-    statusDiv.textContent = "შეცდომა: " + error.message;
+    console.error("Error loading bookings :", error);
+    statusDiv.textContent = "error: " + error.message;
     container.innerHTML = "";
   }
 }

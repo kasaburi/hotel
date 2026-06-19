@@ -7,7 +7,7 @@ overlay.classList.add("nav-overlay");
 
 
 overlay.innerHTML = `
-  <a href="./homs.html">Home</a>
+  <a href="./index.html">Home</a>
   <a href="./rooms.html">Rooms</a>
   <a href="./hotel.html">Hotels</a>
   <a href="./bookedrooms.html">Booked Rooms</a>
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(error => {
         console.error("შეცდომა:", error);
-        cityContainer.innerHTML = "<p style='color:red;'>ქალაქების ჩატვირთვა ვერ მოხერხდა</p>";
+        cityContainer.innerHTML = "<p style='color:red;'>Unable to load cities.</p>";
       });
   }
 });

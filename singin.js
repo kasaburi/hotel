@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await res.json().catch(() => ({}));
 
             if (!res.ok) {
-                errBox.textContent = data.message || data.error || "შესვლა ვერ მოხერხდა";
+                errBox.textContent = data.message || data.error || "Login failed.";
                 errBox.style.display = "block";
                 return;
             }
 
-            okBox.textContent = " წარმატებით შეხვედი!";
+            okBox.textContent = "You have successfully logged in. !";
             okBox.style.display = "block";
 
             if (data.token && data.userId) {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         } catch (err) {
-            errBox.textContent = "ქსელის პრობლემა, სცადე თავიდან";
+            errBox.textContent = "Network problem, try again.";
             errBox.style.display = "block";
         }
     });

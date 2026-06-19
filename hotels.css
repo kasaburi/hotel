@@ -29,7 +29,6 @@ main{
 
 
 
-
  
 .navbar {
   display: flex;
@@ -185,7 +184,7 @@ main{
     border-radius: 50%;
     border: 2px solid rgba(31, 140, 223, 0.696);
     height: 8vh;
-    width: 4vw;
+    width: 60px;
 }
 
 .content2:hover{
@@ -270,14 +269,22 @@ h2{
 .book{
     color: white;
 }
+.card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button{
+  width: 15vw;
+}
 
 
 
-
-@media screen and (min-width: 701px) and  (max-width: 1200px) {
+@media screen and (min-width: 781px) and  (max-width: 1200px) {
 
 main{
-    padding-top: 15%;
+    padding-top: 18%;
     min-height: 160vh;
 }
 
@@ -289,30 +296,51 @@ main{
     width: 10vw;
 }
 
+h2{
+  min-height: 10vh;
+}
+
 #hotels{
     width: 95%;
-    min-height: 100vh;
-    border: none;
-   justify-content: flex-start;
+    min-height: 110vh;
+   justify-content: center;
+   align-content: center;
 
 }
 .hotel-card{
-    height: 65vh;
-    width: 45vw;
+    max-height: 50vh;
+    width: 35vw;
+    height: auto;
     border: none;
-    box-shadow: none;
+
+
     
 }
+h2{
+  max-height: 5vh;
+}
 
+.hotel-card .img{
+  max-height: 35vh;
+}
+.data-city{
+  width: 10vw;
+}
 .content2{
     width: 60px;
 
 }
 
+
+
+
+.all{
+  width: 60vw;
+}
 }
 
 
-@media screen and (min-width: 501px) and  (max-width: 700px) {
+@media screen and (min-width: 501px) and  (max-width: 780px) {
 
 
 body{
@@ -361,8 +389,9 @@ body{
     
   }
 main{
-    min-height: 120vh;
+    min-height: 100vh;
   margin-top: 12%;
+ 
 }
   .nav-links {
     display: none;
@@ -408,19 +437,33 @@ main{
 .hotel-card{
     gap:5%;
     width: 40vw;
-    height: 42vh;
-    border: none;
+    max-height: 35vh;
     box-shadow: none;
 
+
+}
+
+h2{
+  max-height: 90px;
 }
 
 
 
+.hotel-card  .img{
+  max-height: 25vh;
+}
+
+.hotel-card:hover img {
+  display: none;
+}
+
   .hotel-card .button {
     display: none !important;
+
   }
   .hotel-card:hover .button {
     display: block !important;
+    width: 25vw;
   }
 
 
@@ -439,7 +482,10 @@ h2{
 
 .content2{
     width: 60px;
+
+ 
 }
+
 
 
 }
@@ -480,11 +526,13 @@ body{
 
   .hamburger {
     display: block;
-    position: relative;
-    top: 25px;
+    position:relative;
+   top:20px;
+   left: 6px;
     height: auto;
-    width: 5px;
- 
+    width: 10vw;
+    font-size: 35px;
+
     
   }
 
@@ -530,6 +578,7 @@ body{
     font-size: 18px;
     width: 50vw;
     gap:5%;
+    
   }
 
 
@@ -544,15 +593,20 @@ body{
 
 
 main{
-    min-height: 213vh;
+    min-height: 166vh;
+    height: auto;
     margin-top: 17%;
+
 
 }
 
 
+.all{
+  min-width: 60vw;
+
+}
 
 
- 
   .inbox{
     padding-left: 5%;
   }
@@ -570,25 +624,33 @@ main{
     align-items: center;
     width: 95%;
     border: none;
+
+
   }
 
   .hotel-card{
-    width: 95%;
-    min-height: 57vh;
-    border: none;
+    width: 90%;
+    min-height: 42vh;
+    height: auto;
     box-shadow: none;
+
    
   }
   h2{
-    padding-top: 20px;
-  }
+    min-height: 10vh;
 
+  }
+.hotel-card  .img{
+  max-height: 35vh;
+    height: auto;
+}
 
   .hotel-card .button {
     display: none !important;
   }
   .hotel-card:hover .button {
     display: block !important;
+    width: 30vw;
   }
 
 
@@ -601,9 +663,10 @@ main{
 
 
 .content2{
-  width: 14vw;
+  width: 60px;
   max-height: auto;
   padding: 0;
+
 }
 
 }

@@ -7,7 +7,7 @@ overlay.classList.add("nav-overlay");
 
 
 overlay.innerHTML = `
-  <a href="./homs.html">Home</a>
+  <a href="./index.html">Home</a>
   <a href="./rooms.html">Rooms</a>
   <a href="./hotel.html">Hotels</a>
   <a href="./bookedrooms.html">Booked Rooms</a>

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   phoneInput.addEventListener("input", () => {
     const phonePattern = /^\+995\d{9}$/; 
     if (!phonePattern.test(phoneInput.value.trim())) {
-      phoneInput.setCustomValidity("გთხოვ სწორად შეიყვანე ნომერი ფორმატში: +995XXXXXXXXX");
+      phoneInput.setCustomValidity("Please enter the number in the correct format.: +995XXXXXXXXX");
     } else {
       phoneInput.setCustomValidity("");
     }
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   emailInput.addEventListener("input", () => {
     if (emailInput.validity.valueMissing) {
-      emailInput.setCustomValidity("გთხოვ, შეიყვანე ელ-ფოსტა");
+      emailInput.setCustomValidity("Please enter your email address.");
     } else if (emailInput.validity.typeMismatch) {
-      emailInput.setCustomValidity("გთხოვ, შეიყვანე სწორი ელ-ფოსტა (მაგ: user@example.com)");
+      emailInput.setCustomValidity("Please enter a valid email address. (მაგ: user@example.com)");
     } else {
       emailInput.setCustomValidity("");
     }
@@ -76,15 +76,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!res.ok) {
         if (res.status === 409) {
-          errBox.textContent = " ეს ელ-ფოსტა უკვე გამოყენებულია";
+          errBox.textContent = "This email address is already in use.";
         } else {
-          errBox.textContent = data.message || data.error || `ვერ დარეგისტრირდი (HTTP ${res.status})`;
+          errBox.textContent = data.message || data.error || `Could not register (HTTP ${res.status})`;
         }
         errBox.style.display = "block";
         return;
       }
 
-      okBox.textContent = " წარმატებით დარეგისტრირდი!";
+      okBox.textContent = " You have successfully registered.!";
       okBox.style.display = "block";
 
       if (data.token && data.userId) {
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (err) {
       console.error(" Network/CORS error:", err);
-      errBox.textContent = "ვერ დარეგისტრირდი (ქსელის ან CORS პრობლემა)";
+      errBox.textContent = "Failed to register (network or CORS problem)";
       errBox.style.display = "block";
     }
   });

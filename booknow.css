@@ -188,24 +188,6 @@ margin-bottom: 20px;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  header{
   height: 20vh;
   
@@ -233,6 +215,7 @@ margin-bottom: 20px;
   justify-content: center;
   align-items: center;
   z-index: 12;
+ 
 }
 
 .modal-content {
@@ -338,7 +321,6 @@ margin-bottom: 20px;
   height: 10vh;
   width: 300px;
   margin-bottom: 25px;
-  padding-left: 3%;
 
 }
 
@@ -358,39 +340,11 @@ margin-bottom: 20px;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .date-wrapper::before {
   content: "📅";
   position: absolute;
   left: 75%;    
-  top: 67%;
+  top: 89%;
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
@@ -405,22 +359,30 @@ margin-bottom: 20px;
 
 
 .label{
+  display: flex;
+  width: 17vw;
     color: rgb(73, 73, 73);
+    gap:2%;
+
 }
 
 
 
 .Customer{
     color: rgb(73, 73, 73);
+    display: flex;
+    width: 17vw;
+  gap:2%;
 }
 
 .CustomerName{
-    height: 60px;
+    height: 50px;
     width: 300px;
     text-align: center;
      font-size: 18px;
   color:black;
   border: 1px solid rgba(128, 128, 128, 0.407);
+
 }
 
 
@@ -431,12 +393,15 @@ margin-bottom: 20px;
 
 
 .customerPhone{
-     color: rgb(73, 73, 73);
+  display: flex;
+  width: 17vw;
+  gap:2%;
+  color: rgb(73, 73, 73);
 
 }
 
 .tel{
-    height: 70px;
+    height: 50px;
     width: 300px;
     text-align: center;
     font-size: 18px;
@@ -444,10 +409,9 @@ margin-bottom: 20px;
     border: 1px solid rgba(128, 128, 128, 0.407);
     }
 
-
     .submit{
-    height: 50px;
-    width: 300px;
+    height: 40px;
+    width: 180px;
     text-align: center;
     font-size: 18px;
     color: white;
@@ -456,6 +420,7 @@ margin-bottom: 20px;
     border: none;
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
     }
     .submit:hover{
       background-color:  rgba(28, 85, 79, 0.441);
@@ -465,12 +430,12 @@ margin-bottom: 20px;
     #registrationForm{
         display: flex;
         flex-direction: column;
-        gap:3px;
+        gap:10px;
         border: none;
-        height: 86vh;
+        height: 87vh;
         padding: 10px;
         padding-left: 3%;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.595);
+         box-shadow: 0 4px 8px rgba(37, 37, 37, 0.436);
     }
 
 
@@ -537,6 +502,7 @@ z-index:6;
     background-color: rgba(6, 6, 6, 0.863);
     height: 15vh;
 
+
   }
 
  
@@ -573,8 +539,9 @@ z-index:6;
     height: 10vh;
     width: 45vw;
 }
-
-
+#icon{
+  border: 2px solid red;
+}
 
   .content{
     display: flex;
@@ -735,9 +702,7 @@ border-bottom:1px solid rgba(177, 177, 177, 0.167);
 
 }
 
-/* aaaaaaaaaaaa
-aaaaaaaaaa
-aaaaaaaaa */
+
 
 #displayImg {
   border-radius: 8px;
@@ -951,9 +916,6 @@ aaaaaaaaa */
 
 }
 
-.tel{
-  height: 10vh;
-}
 
 .dropdown-list {
   display: none;
@@ -972,6 +934,7 @@ aaaaaaaaa */
   list-style: none;
   z-index: 1;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
 }
 
 .dropdown-list{
@@ -1171,6 +1134,13 @@ aaaaaaaaa */
 
 
 
+.error-message{
+   color:red;
+   text-align: center;
+    display:none;
+
+
+}
 
 
 
@@ -1190,8 +1160,7 @@ aaaaaaaaa */
 
 
 
-
-@media screen and (min-width: 801px) and (max-width: 1300px){
+@media screen and (min-width: 701px) and (max-width: 1300px){
 
 
 #room-details{
@@ -1209,14 +1178,21 @@ aaaaaaaaa */
 }
 
 #registrationForm{
-    width: 37vw;
-    min-height: 86vh;
+    width: 40vw;
+    min-height: 110vh;
+    gap:1%;
+ 
  
 }
 
 .date-wrapper{
     width: 35vw;
+    min-height: 14vh;
+
+
+ 
 }
+
 
 #filter-checkin{
  width: 100%;
@@ -1232,8 +1208,38 @@ aaaaaaaaa */
     width: 35vw;
     min-height: 7vh;
     font-size: 14px;
+  
+    
+    
 }
 
+.Customer{
+
+  width: 90%;
+align-items: center;
+  min-height: 60px;
+}
+
+
+.customerPhone{
+  align-items: center;
+  width: 90%;
+  padding-top: 30px;
+
+}
+
+.label{
+  width: 90%;
+  align-items: flex-end;
+
+}
+
+
+.popup{
+  justify-items: center;
+  min-height: 20vh;
+  gap:0px;
+}
 .tel{
     width: 35vw;
     min-height: 7vh;
@@ -1266,15 +1272,6 @@ article{
 
 
 
-
-
-
-
-
-
-
-
-
 .swiper-slide img {
   width: 100%;         
   max-height: 100vh;        
@@ -1288,6 +1285,7 @@ article{
   left: 25%;
   margin-bottom: 5%;
   margin-top: 2%;
+  min-width: 25vw;
 }
 
 
@@ -1400,13 +1398,18 @@ h3{
 
 
 .date-wrapper::before{
-  position: absolute;
-  bottom: 100% ;
+  top:78px;
+
+}
+.warning-icon::after {
+   min-width: 135px;
+   
+}
+
 }
 
 
 
-}
 
 
 
@@ -1424,10 +1427,7 @@ h3{
 
 
 
-
-
-
-@media screen and (min-width: 501px) and (max-width: 800px){
+@media screen and (min-width: 501px) and (max-width: 700px){
 
 
 
@@ -1505,7 +1505,7 @@ h3{
 
 .icon{
     display: none;
-} */ */
+} 
 
 header{
     min-height:10vh;
@@ -1540,15 +1540,17 @@ main{
 
 #registrationForm{
     width: 80vw;
-    min-height: 89vh;
+    min-height: 100vh;
+    gap:3%;
  
 }
 
 
 .date-wrapper{
-    width: 75vw;
-  
+  width: 75vw;
 }
+
+
 
   .flatpickr-calendar {
     max-width: 85vw;
@@ -1587,8 +1589,8 @@ main{
 
 .submit{
 
-    width: 45vw;
-    height: 5vh;
+    width: 40vw;
+    height: 7vh;
   
 }
 
@@ -1697,6 +1699,7 @@ article{
 img{
     min-height: 35vh; 
    height: auto;
+   width: 100%;
  
  }  
 
@@ -1705,8 +1708,9 @@ img{
 .card{
 
     min-height: 60vh;
-    min-width: 100%;
+    min-width: 80%;
     margin-top: 25px;
+    margin-bottom: 3%;
     
 
  
@@ -1756,9 +1760,14 @@ h3{
 
 
 
+.popup{
+  min-height: 14vh;
+}
 
-
-
+.warning-icon::after {
+   min-width: 135px;
+   
+}
 
 }
 
@@ -1769,7 +1778,6 @@ h3{
 
 
 @media screen and (max-width: 500px){
-
 
 
 
@@ -1821,6 +1829,7 @@ h3{
     display: flex;
     flex-direction: column;
     padding-right: 5%;
+   
     
   }
 
@@ -1832,7 +1841,6 @@ h3{
 
   .nav-overlay.active {
     display: flex;
-    padding-left: 25%;
     min-height: 55vh;
   }
 
@@ -1874,6 +1882,7 @@ header{
 
 main{
     min-height: 120vh;
+    
    
 }
 
@@ -1898,13 +1907,15 @@ main{
 
 #registrationForm{
     width: 80vw;
-    min-height: 89vh;
+    min-height: 92vh;
+
  
 }
 
 
 .date-wrapper{
     width: 75vw;
+
   
 }
 
@@ -1934,8 +1945,16 @@ main{
     width: 75vw;
     min-height: 7vh;
     font-size: 14px;
+    
 }
 
+
+.Customer{
+  margin-top: 20px;
+  width: 70vw;
+  justify-content: space-between;
+
+}
 .tel{
     width: 75vw;
     min-height: 7vh;
@@ -1944,9 +1963,9 @@ main{
 
 
 .submit{
-
+  margin-top: 20px;
     width: 45vw;
-    height: 5vh;
+    height: 6vh;
   
 }
 
@@ -2077,29 +2096,6 @@ img{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 h3{
     min-width: 50vw;
 }
@@ -2125,13 +2121,38 @@ h3{
 
 
 .error-message{
-  position: absolute;
-  left: 30%;
-  z-index: 4;
+ width: 40vw;
+
 }
 
 
+.label{
+  width: 70vw;
+  justify-content: space-between;
+  gap:5%;
 
 
+}
+.customerPhone{
+  width: 70vw;
+  margin-top: 20px;
+  justify-content: space-between;
 
+}
+
+.popup{
+
+  min-height: 12vh;
+}
+
+
+.date-wrapper::before {
+  padding-bottom: 10px;
+
+}
+
+.warning-icon::after {
+   min-width: 125px;
+   
+}
 }

@@ -29,7 +29,7 @@
                 <img src="./image/logo-ai.png" alt="icon" class="icon">
                 <div class="hamburger"><i class="fa-solid fa-bars fa-lg" style="color:rgb(3, 101, 176) "  id="hamburger"></i></div>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="./homs.html">Home</a></li>
+                    <li><a href="./index.html">Home</a></li>
                     <li><a href="./rooms.html">Rooms</a></li>
                     <li><a href="./hotel.html">Hotels</a></li>
                     <li><a href="./bookedrooms.html">Booked Rooms</a></li>
@@ -59,45 +59,25 @@
                     </div>
                     <div class="date-wrapper">
                         <label for="checkin" class="label">Check-in
-                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="check-in is from 11:00"></i>
-                        </label><br />
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;"  data-tooltip="check-in is from 11:00"></i>
+                            <span   class="error-message" id="checkin-error" >Choose Check-in </span>
+                        </label>
                         <input type="text" id="filter-checkin" name="checkin" required placeholder="check-in" />
-                        <div class="error-message" id="checkin-error" style="color:red; display:none;">გთხოვთ, აირჩიეთ Check-in თარიღი.</div>
                     </div>
                     <div class="date-wrapper">
                         <label for="checkout" class="label">Check-out
                             <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="check-out is from 12:00"></i>
+                            <spanc class="error-message" id="checkout-error" >Choose Check-out  </span>
                         </label><br />
                         <input type="text" id="filter-checkout" name="checkout" required placeholder="check-out" />
-                        <div class="error-message" id="checkout-error" style="color:red; display:none;">გთხოვთ, აირჩიეთ Check-out თარიღი.</div>
                     </div>
                     <div class="popup">
-                        <label for="customerName"  class="Customer" >Name</label><br />
-                        <input
-                            type="text"
-                            id="customerName"
-                            name="customerName"
-                            placeholder="Please enter your name"
-                            required
-                            class="CustomerName"       />
-                        <div class="error-message" id="name-error" style="color:red; display:none;">
-                            გთხოვთ მიუთითოთ თქვენი სახელი
-                        </div><br/>
+                        <label for="customerName"  class="Customer" >Name  <span class="error-message" id="name-error">Enter a name.  </span></label><br />
+                        <input type="text" id="customerName" name="customerName"  placeholder="Please enter your name" required class="CustomerName"       />
                     </div>
                     <div class="popup" >
-                        <label for="customerPhone"   class="customerPhone"> Phone</label><br />
-                        <input
-                            type="tel"
-                            id="customerPhone"
-                            name="customerPhone"
-                            placeholder="phone"
-                            required
-                            class="tel"  
-                            pattern="^\+995\d{9}$"
-                            />
-                        <div class="error-message" id="phone-error" style="color:red; display:none;">
-                           გთხოვთ მიუთით მობილურის ნომერი
-                        </div><br/>
+                        <label for="customerPhone"   class="customerPhone"> Phone <span  class="error-message" id="phone-error" >Please provide your mobile number.   </span></label><br />
+                        <input type="tel" id="customerPhone" name="customerPhone" placeholder="phone" required class="tel"   pattern="^\+995\d{9}$"  />
                     </div>
                     <button type="submit" class="submit" disabled   >book now</button>
                 </form>
