@@ -200,23 +200,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
 const params = new URLSearchParams(window.location.search);
 const hotelId = params.get("hotelId");
 
-if (hotelId) {
-  fetch(`https://hotelbooking.stepprojects.ge/api/Hotels/GetHotel/${hotelId}`)
-    .then(res => res.json())
-    .then(data => {
-      renderRooms(data.rooms); 
-    })
-    .catch(err => console.error("შეცდომა:", err));
-}
+// if (hotelId) {
+//   fetch(`http://127.0.0.1:8000/api/Rooms/GetAll?hotel_id=${hotelId}`)
+//     .then(res => {
+//       if (!res.ok) {
+//         throw new Error(`HTTP error: ${res.status}`);
+//       }
+//       return res.json();
+//     })
+//     .then(data => {
+//       renderRooms(data.rooms);
+//     })
+//     .catch(err => console.error("შეცდომა:", err));
+// }
 
 
 
 
-
-
+fetch(`https://hotel-backend-qeue.onrender.com/api/hotels/${hotelId}`)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error(`HTTP error: ${res.status}`);
+    }
+    return res.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(err => console.error("შეცდომა:", err));
 

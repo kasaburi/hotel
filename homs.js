@@ -33,7 +33,7 @@ overlay.addEventListener("click", () => {
 let section = document.getElementById("section");
 
 function getAll() {
-  fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
+  fetch("https://hotel-backend-qeue.onrender.com/api/Rooms/GetAll")
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

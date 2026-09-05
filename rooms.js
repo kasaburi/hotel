@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchRooms() {
   try {
-    const res = await fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll");
+    const res = await fetch("https://hotel-backend-qeue.onrender.com/api/Rooms/GetAll");
     allRooms = await res.json();
     if (Array.isArray(allRooms) && allRooms.length) {
       renderRooms(allRooms);
