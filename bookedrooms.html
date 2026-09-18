@@ -16,22 +16,36 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
-         <header>
+       <header>
             <nav class="navbar">
                 <div class="hotel">
                     <div class="star">
-                        <i class="fa-regular fa-star fa-lg" style="color: #fcfdfe;"></i>
+                        <i class="fa-regular fa-star fa-xl"  style="color: #ffffff;"></i>
                     </div>
                     <p>Star Hotell</p>
                 </div>
                 <img src="./image/logo-ai.png" alt="icon" class="icon">
-                <div class="hamburger"><i class="fa-solid fa-bars fa-lg" style="color:rgb(3, 101, 176) "  id="hamburger"></i></div>
+                <div class="hamburger">
+                    <i class="fa-solid fa-bars fa-lg"  style="color:rgb(3, 101, 176)" id="hamburger"></i>
+                </div>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="./index.html">Home</a></li>
                     <li><a href="./rooms.html">Rooms</a></li>
                     <li><a href="./hotel.html">Hotels</a></li>
                     <li><a href="./bookedrooms.html">Booked Rooms</a></li>
                 </ul>
+                <div class="log">
+                    <button type="button" id="btnLoginRegister">
+                        Login
+                        <img src="./image/login.svg" class="login">
+                    </button>
+                </div>
+                <div id="authPopup" class="auth-popup">
+                    <div class="auth-popup-content">
+                        <button type="button" id="btnClose" class="auth-close">❌</button>
+                        <div id="authContent"></div>
+                    </div>
+                </div>
             </nav>
         </header>
         <main>

@@ -22,18 +22,29 @@
             <nav class="navbar">
                 <div class="hotel">
                     <div class="star">
-                        <i class="fa-regular fa-star fa-lg" style="color: #fcfdfe;"></i>
+                        <i class="fa-regular fa-star fa-lg" style="color: #fcfdfe;" id="st"></i>
                     </div>
-                    <p>Star Hotell</p>
+                    <p class="starhotel">Star Hotell</p>
                 </div>
                 <img src="./image/logo-ai.png" alt="icon" class="icon">
-                <div class="hamburger"><i class="fa-solid fa-bars fa-lg" style="color:rgb(3, 101, 176) "  id="hamburger"></i></div>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="./index.html">Home</a></li>
                     <li><a href="./rooms.html">Rooms</a></li>
                     <li><a href="./hotel.html">Hotels</a></li>
                     <li><a href="./bookedrooms.html">Booked Rooms</a></li>
                 </ul>
+                <div class="log">
+                    <button type="button" id="btnLoginRegister">Login
+                        <img src="./image/login.svg" class="login">
+                    </button>
+                </div>
+                <div id="authPopup" class="auth-popup">
+                    <div class="auth-popup-content">
+                        <button type="button" id="btnClose" class="auth-close"> ❌</button>
+                        <div id="authContent"></div>
+                    </div>
+                </div>
+                <div class="hamburger"><i class="fa-solid fa-bars fa-lg" style="color:rgb(3, 101, 176) "  id="hamburger"></i></div> 
             </nav>
         </header>
         <main>
@@ -67,7 +78,7 @@
                     <div class="date-wrapper">
                         <label for="checkout" class="label">Check-out
                             <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="check-out is from 12:00"></i>
-                            <spanc class="error-message" id="checkout-error" >Choose Check-out  </span>
+                            <span class="error-message" id="checkout-error" >Choose Check-out  </span>
                         </label><br />
                         <input type="text" id="filter-checkout" name="checkout" required placeholder="check-out" />
                     </div>
@@ -190,6 +201,40 @@
                <div class="roombox"></div>
             </div>
             <div id="roomsContainer" ></div>
+            <div id="paymentModal" class="payment-modal hidden">
+                <div class="payment-window">
+                    <button type="button" id="paymentClose"  class="payment-close" aria-label="Close payment"> &times;</button>
+                    <h2>Payment</h2>
+                    <div class="payment-summary">
+                        <div class="payment-row">
+                            <span>Room</span>
+                            <strong id="paymentRoomName">-</strong>
+                        </div>
+                        <div class="payment-row">
+                            <span>Price per night</span>
+                            <strong id="paymentRoomPrice">0 ₾</strong>
+                        </div>
+                        <div class="payment-row">
+                            <span>Nights</span>
+                            <strong id="paymentNights">0</strong>
+                        </div>
+                        <div class="payment-total">
+                            <span>Total</span>
+                            <strong id="paymentTotal">0 ₾</strong>
+                        </div>
+                    </div>
+                    <div class="payment-form">
+                        <label for="cardNumber"> Card Number</label>
+                        <input type="text"  id="cardNumber"  placeholder="1234 5678 9012 3456" maxlength="19"  inputmode="numeric" autocomplete="off"required >
+                        <label for="cardExpiry"> Expiry Date</label>
+                        <input type="text"id="cardExpiry" placeholder="MM/YY"maxlength="5"inputmode="numeric"autocomplete="off" required >
+                        <label for="cardCvv">CVV</label>
+                        <input type="password" id="cardCvv" placeholder="123" maxlength="3"inputmode="numeric" autocomplete="off"required >
+                        <button type="button" id="payButton" class="pay-button" >Pay</button>
+                    </div>
+                    <p class="fake-payment-note">This is a demo payment. No real money will be charged.</p>
+                </div>
+            </div>
         </main>
         <footer>
             <div class="content1">

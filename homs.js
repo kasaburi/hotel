@@ -1,31 +1,128 @@
-const hamburger = document.getElementById("hamburger");
-const navLinks = document.getElementById("navLinks");
+const hamburger =
+  document.getElementById("hamburger");
 
+const navLinks =
+  document.getElementById("navLinks");
 
-const overlay = document.createElement("div");
+const overlay =
+  document.createElement("div");
+
 overlay.classList.add("nav-overlay");
-
 
 overlay.innerHTML = `
   <a href="./index.html">Home</a>
   <a href="./rooms.html">Rooms</a>
   <a href="./hotel.html">Hotels</a>
   <a href="./bookedrooms.html">Booked Rooms</a>
+
+  <button type="button" id="mobileLogin">
+    Login
+    <img src="./image/login.svg" class="login">
+  </button>
 `;
 
 document.body.appendChild(overlay);
 
 
-hamburger.addEventListener("click", () => {
-  hamburger.style.display = "none";
-  overlay.classList.add("active");
-});
+// ==========================================
+// HAMBURGER OPEN
+// ==========================================
+
+if (hamburger) {
+
+  hamburger.addEventListener("click", () => {
+
+    hamburger.style.display = "none";
+
+    overlay.classList.add("active");
+
+  });
+
+}
 
 
-overlay.addEventListener("click", () => {
-  overlay.classList.remove("active");
-  hamburger.style.display = "block";
-});
+// ==========================================
+// MOBILE LOGIN
+// ==========================================
+
+const mobileLogin =
+  document.getElementById("mobileLogin");
+
+const desktopLogin =
+  document.getElementById("btnLoginRegister");
+
+const authPopup =
+  document.getElementById("authPopup");
+
+const btnClose =
+  document.getElementById("btnClose");
+
+
+// Login popup-ის გახსნის ფუნქცია
+function openAuthPopup() {
+
+  if (authPopup) {
+
+    authPopup.classList.add("active");
+
+  }
+
+}
+
+
+// Desktop Login
+if (desktopLogin) {
+
+  desktopLogin.addEventListener(
+    "click",
+    openAuthPopup
+  );
+
+}
+
+
+// Mobile Login
+if (mobileLogin) {
+
+  mobileLogin.addEventListener(
+    "click",
+    () => {
+
+      // hamburger მენიუს დახურვა
+      overlay.classList.remove("active");
+
+      if (hamburger) {
+        hamburger.style.display = "block";
+      }
+
+      // Login popup-ის გახსნა
+      openAuthPopup();
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// POPUP CLOSE
+// ==========================================
+
+if (btnClose) {
+
+  btnClose.addEventListener(
+    "click",
+    () => {
+
+      authPopup.classList.remove("active");
+
+    }
+  );
+
+}
+
+
+
 
 
 
@@ -70,7 +167,7 @@ function getAll() {
     })
     .catch(error => {
       console.error("Error fetching rooms:", error);
-      if (section) section.innerHTML = "<p>დატვირთვა ვერ მოხერხდა</p>";
+      if (section) section.innerHTML = "<p>Loading failed.</p>";
     });
 }
 
@@ -90,6 +187,27 @@ function cardPrint(room) {
   `;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const cityContainer = document.getElementById("city");
 
@@ -97,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("https://hotelbooking.stepprojects.ge/api/Hotels/GetCities")
       .then(response => {
         if (!response.ok) {
-          throw new Error("ქალაქების ჩატვირთვა ვერ მოხერხდა");
+          throw new Error("Unable to load cities.");
         }
         return response.json();
       })
@@ -114,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!token) {
               openAuthPopup();
             } else {
-              console.log("არჩეული ქალაქია:", city);
+              console.log("The chosen city is:", city);
          
             }
           });
@@ -123,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       })
       .catch(error => {
-        console.error("შეცდომა:", error);
+        console.error("error:", error);
         cityContainer.innerHTML = "<p style='color:red;'>Unable to load cities.</p>";
       });
   }
@@ -143,130 +261,371 @@ getAll();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
-  localStorage.removeItem("userToken");
+    const btnLoginRegister =
+        document.getElementById("btnLoginRegister");
 
-  const popup = document.getElementById("authPopup");
-  const authContent = document.getElementById("authContent");
-  const btnLogin = document.getElementById("btnLogin");
-  const btnRegister = document.getElementById("btnRegister");
-  const btnClose = document.getElementById("btnClose");
-  const seeHotelsBtn = document.querySelector(".button1");
+    const popup =
+        document.getElementById("authPopup");
 
+    const authContent =
+        document.getElementById("authContent");
 
-  function openPopup(innerHtml) {
-    authContent.innerHTML = innerHtml;
-    popup.style.display = "flex";
-  }
+    const btnClose =
+        document.getElementById("btnClose");
 
 
-  function closePopup() {
-    popup.style.display = "none";
-    authContent.innerHTML = "";
-  }
+    // ==========================================
+    // CHECK ELEMENTS
+    // ==========================================
 
-  function redirectToHotels() {
-    console.log("➡️ გადამისამართება hotel.html–ზე...");
-    window.location.href = "./hotel.html";
-  }
+    if (!popup || !authContent || !btnClose) {
 
+        console.error(
+            "❌ Required elements for login popup not found"
+        );
 
-  function handleProtectedNavigation(source) {
-    console.log(" handleProtectedNavigation გამოიძახეს (" + source + ")");
-    const token = localStorage.getItem("userToken");
-    console.log(" userToken =", token);
-
-    if (token) {
-      console.log(" ავტორიზებულია → გადამისამართება მოხდება 2 წამში...");
-      setTimeout(() => {
-        redirectToHotels();
-      }, 2000);
-    } else {
-      console.log(" არ არის ავტორიზებული → ვაჩვენებ popup-ს");
-      openPopup("<p style='font-size:18px; color:red;'>გთხოვთ გაიაროთ ავტორიზაცია hotels გვერდზე გადასასვლელად.</p>");
+        return;
     }
-  }
-
-  
-  if (seeHotelsBtn) {
-    seeHotelsBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log(" 'See Hotels' ღილაკზე ჰენდლერი მიებმულა");
-      handleProtectedNavigation("See Hotels ღილაკი");
-    });
-  }
-
-  const navHotelsLink = document.querySelector("a[href='./hotel.html']");
-  if (navHotelsLink) {
-    navHotelsLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log("ნავბარის 'Hotels' ლინკზე ჰენდლერი მიებმულა");
-      handleProtectedNavigation("Navbar Hotels link");
-    });
-  }
 
 
-  
+    // ==========================================
+    // POPUP CONTENT
+    // ==========================================
+
+    const popupContent =
+        document.querySelector(".auth-popup-content");
 
 
+    // ==========================================
+    // OPEN LOGIN / REGISTER POPUP
+    // ==========================================
 
-    
-  btnLogin.addEventListener("click", () => {
-    authContent.innerHTML = '<iframe src="singin.html" style="width:100%; height:400px; border:none;"></iframe>';
-    popup.style.display = "flex";
-});
+    function openAuthPopup() {
 
-    btnRegister.addEventListener("click", () => {
-        authContent.innerHTML = '<iframe src="registre.html" style="width:100%; height:400px; border:none;"></iframe>';
         popup.style.display = "flex";
+
+
+        // საწყის მდგომარეობაზე დაბრუნება
+
+        popupContent.classList.remove(
+            "registration-popup",
+            "authorization-popup"
+        );
+
+
+        // ======================================
+        // POPUP BUTTONS
+        // ======================================
+
+        authContent.innerHTML = `
+
+            <div class="auth-choice">
+
+                <div class="go">
+                    Login
+
+                    <img
+                        src="./image/login.svg"
+                        class="login"
+                        alt="Login"
+                    >
+                </div>
+
+
+                <button
+                    type="button"
+                    id="popupLogin"
+                    class="auth-choice-btn">
+
+                    Authorization
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="popupRegister"
+                    class="auth-choice-btn">
+
+                    Registration
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        // ======================================
+        // AUTHORIZATION BUTTON
+        // ======================================
+
+        const popupLogin =
+            document.getElementById("popupLogin");
+
+
+        if (popupLogin) {
+
+            popupLogin.addEventListener("click", () => {
+
+                // popup-ის დახურვა
+                closePopup();
+
+                // Authorization გვერდზე გადასვლა
+                window.location.href =
+                    "./singin.html";
+
+            });
+
+        }
+
+
+        // ======================================
+        // REGISTRATION BUTTON
+        // ======================================
+
+        const popupRegister =
+            document.getElementById("popupRegister");
+
+
+        if (popupRegister) {
+
+            popupRegister.addEventListener("click", () => {
+
+                // popup-ის დახურვა
+                closePopup();
+
+                // Registration გვერდზე გადასვლა
+                window.location.href =
+                    "./registre.html";
+
+            });
+
+        }
+
+    }
+
+
+    // ==========================================
+    // LOGIN / LOGOUT BUTTON
+    // ==========================================
+
+    function updateAuthButton() {
+
+        const token =
+            localStorage.getItem("token");
+
+
+        // ======================================
+        // USER IS LOGGED IN
+        // ======================================
+
+        if (token) {
+
+            if (btnLoginRegister) {
+
+                btnLoginRegister.innerHTML = `
+
+                    Log Out
+
+                    <img
+                        src="./image/login.svg"
+                        class="login"
+                        alt="Log Out"
+                    >
+
+                `;
+
+
+                // ძველი click event-ის თავიდან აცილება
+
+                btnLoginRegister.onclick = null;
+
+
+                btnLoginRegister.onclick = () => {
+
+                    logout();
+
+                };
+
+            }
+
+        }
+
+
+        // ======================================
+        // USER IS NOT LOGGED IN
+        // ======================================
+
+        else {
+
+            if (btnLoginRegister) {
+
+                btnLoginRegister.innerHTML = `
+
+                    Login
+
+                    <img
+                        src="./image/login.svg"
+                        class="login"
+                        alt="Login"
+                    >
+
+                `;
+
+
+                btnLoginRegister.onclick = () => {
+
+                    openAuthPopup();
+
+                };
+
+            }
+
+        }
+
+    }
+
+
+    // ==========================================
+    // LOG OUT
+    // ==========================================
+
+    function logout() {
+
+        // JWT token-ის წაშლა
+        localStorage.removeItem("token");
+
+        // User ID-ის წაშლა
+        localStorage.removeItem("userId");
+
+        // User Email-ის წაშლა
+        localStorage.removeItem("userEmail");
+
+
+        console.log(
+            "✅ User successfully logged out"
+        );
+
+
+        // ღილაკის დაბრუნება Login-ზე
+        updateAuthButton();
+
+
+        // მთავარ გვერდზე დაბრუნება
+        window.location.href =
+            "./index.html";
+
+    }
+
+
+    // ==========================================
+    // DESKTOP LOGIN / LOGOUT BUTTON
+    // ==========================================
+
+    updateAuthButton();
+
+
+    // ==========================================
+    // MOBILE LOGIN / LOGOUT BUTTON
+    // ==========================================
+
+    document.addEventListener("click", (event) => {
+
+        const mobileButton =
+            event.target.closest("#mobileLogin");
+
+
+        if (!mobileButton) {
+            return;
+        }
+
+
+        const token =
+            localStorage.getItem("token");
+
+
+        // ======================================
+        // MOBILE LOG OUT
+        // ======================================
+
+        if (token) {
+
+            logout();
+
+            return;
+
+        }
+
+
+        // ======================================
+        // MOBILE LOGIN
+        // ======================================
+
+        openAuthPopup();
+
     });
 
 
+    // ==========================================
+    // CLOSE BUTTON
+    // ==========================================
+
+    btnClose.addEventListener("click", () => {
+
+        closePopup();
+
+    });
 
 
+    // ==========================================
+    // CLOSE FUNCTION
+    // ==========================================
+
+    function closePopup() {
+
+        popup.style.display = "none";
+
+        authContent.innerHTML = "";
 
 
+        popupContent.classList.remove(
+            "registration-popup",
+            "authorization-popup"
+        );
 
-
-
-
-
-
-  btnClose.addEventListener("click", closePopup);
-  popup.addEventListener("click", (e) => { if (e.target === popup) closePopup(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePopup(); });
-
-  window.addEventListener("message", (event) => {
-    if (event.data.type === "loginSuccess") {
-      localStorage.setItem("userToken", event.data.token);
-      if (event.data.userEmail) localStorage.setItem("userEmail", event.data.userEmail);
-      closePopup();
-      redirectToHotels();
     }
-  });
+
+
+    // ==========================================
+    // CLICK OUTSIDE POPUP
+    // ==========================================
+
+    popup.addEventListener("click", (event) => {
+
+        if (event.target === popup) {
+
+            closePopup();
+
+        }
+
+    });
+
+
+    // ==========================================
+    // ESC KEY
+    // ==========================================
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+
+            closePopup();
+
+        }
+
+    });
+
 });

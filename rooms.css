@@ -29,6 +29,15 @@ html, body {
 
 
 
+
+
+
+
+
+
+
+
+
 .icon{
     height: 10vh;
     width: 5vw;
@@ -135,7 +144,9 @@ main {
 }
 
 
-
+.card-container{
+    border: none;
+}
 
 
 .star{
@@ -155,18 +166,6 @@ section{
     border: none;
 }
 
-
-#roomTypeContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 8vh;
-    width: 40vw;
-
-
-     
-}
 
 
 #roomsContainer,
@@ -238,13 +237,46 @@ section{
   display: none;
 }
 
+#roomTypeContainer{
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    width: 80vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 8vh;
+}
+
+.room-type-btn {
+    width: 140px;
+    font-size: 14px;
+    background-color: rgba(15, 91, 149, 0.129);
+    height: 48px;
+    text-align: center;
+    margin: 8px;
+    color: rgba(4, 4, 4, 0.596);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.room-type-btn:hover {
+    background-color: rgba(15, 91, 149, 0.529);
+}
+
+.room-type-btn.active {
+    background-color: #0f5b9572;
+}
 
 
 .cardbody{
     display: flex;
     flex-direction: column;
-    background-color:rgb(131, 241, 254, 0.168);
+    background-color:rgba(3, 101, 176, 0.052);
     border: none;
+    width: 8vw;
+    text-align: center;
 
 }
 .euro{
@@ -266,7 +298,7 @@ section{
 
 .book-btn {
   display: none;
-  background-color: rgba(52, 180, 165, 0.44);
+  background-color:  rgb(3, 101, 176);
   height: 6vh;
   width: 8vw;
   border-radius: 8px;
@@ -281,13 +313,14 @@ section{
   cursor: pointer;
   z-index: 2;
   transition: background-color 0.3s ease;
-      visibility: hidden;
+visibility: hidden;
   opacity: 0;
 }
 
 .card:hover .book-btn {
   display: block;
     visibility: visible;
+    background-color: rgb(3, 68, 118);
   opacity: 1;
 }
 
@@ -296,7 +329,7 @@ section{
 
 
 .book-btn1 {
-  background-color: rgba(52, 180, 165, 0.44);
+  background-color: rgb(3, 101, 176);
   height: 6vh;
   width: 8vw;
   border-radius: 8px;
@@ -310,7 +343,6 @@ section{
   transform: translateX(-50%) translateY(10px); 
   cursor: pointer;
   z-index: 2;
-
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -437,12 +469,13 @@ article{
     flex-wrap: wrap;
     align-items: center;
     padding-left: 5%;
-    border: #c4c3c352;
+    border: #c4c3c30b;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border: none;
     width: 85vw;
     height: 30vh;
     gap:2%;
+ 
 }
 
 
@@ -500,7 +533,7 @@ article{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:16%;
+    gap:16px;
     color: #484848a6;
     font-size: 18px;
     padding: 10px;
@@ -510,9 +543,10 @@ article{
 #filter-room-type{
     color: #62616164;
     font-size: 18px;
-    height: 6vh;
-    width: 12vw;
-    border-radius: 5%;
+    height: 48px;
+    text-align: center;
+    width: 180px;
+    border-radius: 8px;
     border:1px solid #62616164;
 }
 
@@ -521,11 +555,12 @@ article{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:16%;
+    gap:16px;
     color: #484848a6;
     font-size: 18px;
     padding: 10px;
     width: 12vw;
+  
 }
 
 
@@ -533,9 +568,11 @@ article{
 #filter-checkin{
     color: #62616164;
     font-size: 18px;
-    height: 6vh;
-    width: 12vw;
-    border-radius: 5%;
+    height: 48px;
+    padding: 24px;
+    text-align: center;
+    width: 180px;
+    border-radius: 8px;
     border:1px solid #62616164;
 
 }
@@ -545,22 +582,27 @@ article{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:16%;
+    gap:16px;
     color: #484848a6;
     font-size: 18px;
     padding: 10px;
     width: 12vw;
+
 
 }
 
 
 
 #filter-checkout{
+     color: #62616164;
     font-size: 18px;
-    height: 6vh;
-    width: 12vw;
-    border-radius: 5%;
+    height: 48px;
+    padding: 24px;
+    text-align: center;
+    width: 180px;
+    border-radius: 8px;
     border:1px solid #62616164;
+
 
 
 }
@@ -581,7 +623,7 @@ article{
   .date-wrapper::before {
     content: "📅";
     position: absolute;
-    left: 70%;
+    left: 80%;
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
@@ -683,7 +725,7 @@ article{
 .guest-click{
     font-weight: bold;
     border: none;
-    color:rgba(31, 140, 223, 0.696);
+    color:rgb(3, 101, 176);
     font-size: 18px;
     height: 5vh;
     width: 10vw;
@@ -711,14 +753,15 @@ article{
     width: 10vw;
     height: 5vh;
     border-radius: 5%;
-    background-color: rgba(31, 140, 223, 0.696);
-    border: 1px solid rgba(31, 140, 223, 0.696);
+    background-color:rgb(3, 101, 176);
+    border: 1px solid rgb(3, 101, 176);
     color: white;
     font-weight: bold;
 }
 #filter-btn:hover{
-    background-color: rgba(31, 140, 223, 0.447);
-    box-shadow: 0 2px 8px #74C0FC;
+    background-color: rgba(31, 140, 223, 0.544);
+    border: none;
+  
 }
 
 
@@ -726,16 +769,19 @@ article{
     width: 10vw;
     height: 5vh;
     border-radius: 5%;
-    background-color: rgba(31, 140, 223, 0.696);
-    border: 1px solid rgba(31, 140, 223, 0.696);
-    color: white;
+    
+    border: 1px solid rgb(3, 101, 176);
+    color: rgb(3, 101, 176);
     font-weight: bold;
 
 }
 
 #reset-btn:hover{
-     background-color: rgba(31, 140, 223, 0.447);
-    box-shadow: 0 2px 8px #74C0FC;
+      background-color: rgba(31, 140, 223, 0.544);
+    border: none;
+    color: white;
+  
+    
 }
 
 
@@ -769,6 +815,520 @@ article{
 
 
 
+.go{
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 8px;
+ background-color: rgb(3, 101, 176);
+  border-radius: 16px;
+  width: 150px;
+  height: 48px;
+  color: white;
+}
+
+
+
+
+.login{
+   width: 24px;
+   height: 24px;
+}
+
+
+
+
+.auth-popup-content {
+    position: relative;
+    width: auto;
+    min-width: 450px;
+    min-height: 250px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px 30px;
+    box-sizing: border-box;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    animation: authPopupOpen 0.25s ease;
+    transition: width 0.3s ease;
+}
+
+
+
+.auth-popup-content.registration-popup {
+    min-width: 950px;
+    width: 650px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.auth-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+
+.auth-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.auth-close:hover {
+    background: #f1f1f1;
+
+    transform: scale(1.1);
+}
+
+
+
+.auth-choice {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  gap:24px;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* TITLE */
+
+.auth-choice h2 {
+    margin: 10px 0 30px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+}
+
+
+
+.auth-choice-btn {
+    width: 100%;
+    max-width: 220px;
+    padding: 14px 20px;
+    margin-bottom: 15px;
+    border:  1px solid rgb(3, 101, 176);
+    border-radius: 10px;
+    color: rgb(3, 101, 176);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+.auth-choice-btn:hover {
+    background: rgb(3, 79, 137);
+  border: none;
+      color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.auth-choice-btn:active {
+    transform: translateY(0);
+}
+
+
+.auth-popup-content iframe {
+    display: block;
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 10px;
+}
+
+
+
+@keyframes authPopupOpen {
+
+    from {
+        opacity: 0;
+
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+
+
+
+
+#btnLoginRegister {
+  border: none;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap:8px;
+    outline: none;
+    border-radius: 16px;
+   width: 130px;
+    background: transparent;
+    color: #EFEFEF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 18px;
+ background-color: rgb(3, 101, 176);
+    transition: all 0.3s ease;
+}
+
+#btnLoginRegister:hover {
+   background-color: rgb(3, 68, 118);
+}
+
+
+.go{
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 8px;
+ background-color: rgb(3, 101, 176);
+  border-radius: 16px;
+  width: 150px;
+  height: 48px;
+  color: white;
+}
+
+
+
+
+.login{
+   width: 24px;
+   height: 24px;
+}
+
+
+
+
+
+
+
+
+.auth-popup-content {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    min-height: 220px;
+    height: auto;
+    padding: 35px 20px 20px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ddd;
+}
+
+
+
+.auth-popup-content.registration-popup {
+    min-width: 950px;
+    width: 650px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.auth-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+.auth-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.auth-close:hover {
+    background: #f1f1f1;
+
+    transform: scale(1.1);
+}
+
+
+
+.auth-choice {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  gap:24px;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.auth-choice h2 {
+    margin: 10px 0 30px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+}
+
+
+
+.auth-choice-btn {
+    width: 100%;
+   width: 220px;
+    padding: 14px 20px;
+    margin-bottom: 15px;
+    border:  1px solid rgb(3, 101, 176);
+    border-radius: 10px;
+    color: rgb(3, 101, 176);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+.auth-choice-btn:hover {
+    background: rgb(3, 79, 137);
+     border: none;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.auth-choice-btn:active {
+    transform: translateY(0);
+}
+
+.auth-popup-content iframe {
+    display: block;
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 10px;
+}
+
+
+
+
+@keyframes authPopupOpen {
+
+    from {
+        opacity: 0;
+
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+
+
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .popup-content {
+      background: #fff;
+      width: 90%;
+      max-width: 600px;
+      height: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .popup-header {
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .popup-buttons button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: red;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .popup-frame {
+      flex: 1;
+      border: none;
+      width: 100%;
+    }
+
+.log{
+  display: flex;
+ justify-content: flex-end;
+  width: 30vw;
+  height: 48px;
+}
+
+
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px auto;
+    min-height: 50px;
+    width: 100%;
+}
+
+.page-btn {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ccc;
+    background: white;
+    color: black;
+
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.page-btn.active {
+    background: #0365b0;
+    color: white;
+    border-color: #0365b0;
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media screen and (min-width: 1151px) and (max-width: 1300px){
@@ -779,16 +1339,22 @@ article{
     }
 
 #filter-form{
-    min-height: 40vh;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap:32px;
+    min-height: 30vh;
+    padding: 16px;
+    height: auto;
+   
 }
-
-
-
 
  .card-container{
     display: flex;
     flex-direction: column;
     width: 25vw;
+    height: auto;
+    min-height: 15vh;
     height: auto;
 } 
 
@@ -799,6 +1365,20 @@ img{
  
  }  
 
+ .form-group{
+    display: flex;
+    flex-direction: row;
+    width: 40vw;
+    min-height: 5vh;
+    height: auto;
+    gap:16px;
+ }
+
+
+#filter-btn,
+#reset-btn{
+    width: 180px;
+}
 
 
 .card{
@@ -813,6 +1393,11 @@ h3{
     width: 20vw;
 }
 
+.book-btn1{
+    width: 200px;
+  min-height: 48px;
+}
+
 }
 
 
@@ -821,6 +1406,20 @@ h3{
 
 @media screen and (min-width: 869px) and (max-width: 1150px){
 
+ .form-group{
+    display: flex;
+    flex-direction: row;
+    min-width: 40vw;
+    min-height: 5vh;
+    height: auto;
+    gap:16px;
+ }
+
+
+#filter-btn,
+#reset-btn{
+    width: 180px;
+}
 
 
 .navbar{
@@ -832,6 +1431,7 @@ h3{
 #roomTypeContainer{
     width: 90vw;
     min-height: 7vh;
+    height: auto;
 }
 
 #filter-form{
@@ -839,7 +1439,8 @@ h3{
     justify-content: space-between;
     width: 100%;
     gap:3%;
-    min-height: 80vh;
+    min-height: 60vh;
+    height: auto;
    
 }
 
@@ -1023,6 +1624,14 @@ width: 70px;
 
 }
 
+
+
+.book-btn1{
+    width: 200px;
+  min-height: 48px;
+}
+
+
 }
 
 
@@ -1056,8 +1665,10 @@ width: 70px;
 
 
 #roomTypeContainer{
-    width: 90vw;
-    min-height: 7vh;
+    min-width: 90vw;
+    justify-content: center;
+    min-height: 25vh;
+    height: auto;
 }
 
 #filter-form{
@@ -1176,13 +1787,17 @@ main{
 }
 
 #filter-btn{
-    width: 100%;
+    width: 200px;
+    min-height: 48px;
+    height: auto;
     margin: 5%;
+
 }
 
 #reset-btn{
-    
-width: 100%;
+width: 200px;
+    min-height: 48px;
+    height: auto;
 }
 
 
@@ -1241,7 +1856,10 @@ main{
 
 
 
-
+.book-btn1{
+    width: 200px;
+  min-height: 48px;
+}
 
 
 .content2{
@@ -1268,7 +1886,7 @@ body{
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 400vh;
+  min-height: 40vh;
   height: auto;
   margin: 0;
 }
@@ -1368,11 +1986,14 @@ header{
 main{
     width: 90%;
     margin-top: 6%;
+    align-items: center;
     height: auto;
+
 }
 
 section{
     width: 90vw;
+    
 }
 
 .all-button{
@@ -1384,22 +2005,29 @@ section{
 
 
 #roomTypeContainer{
-    display: flex;
-    flex-wrap: wrap;
     min-width: 90vw;
-    height: 80px;
-    margin: 0px;
+    justify-content: center;
+    min-height: 25vh;
+    height: auto;
 }
+
+
+
+
 
 
 #filter-form{
     flex-direction: column;
     width: 90vw;
-    min-height: 116vh;
+    min-height: 110vh;
+    height: auto;
+    gap:24px;
+
    
 }
 .price{
-    min-height: 5vh;
+    min-height: 48px;
+    height: auto;
     width: 100%;
 }
 
@@ -1417,6 +2045,8 @@ section{
 
 .date-wrapper input{
     width: 80px;
+      min-height: 48px;
+    height: auto;
 }
 
 
@@ -1425,16 +2055,22 @@ section{
 
 
 .type{
-    width: 100%;
+  width: 80%;
+    margin-top: 5%;
 }
 
 #filter-room-type{
-    margin-top: 5%;
-    width: 80%;
+       width: 100%;
+       min-height: 64px;
+    height: auto;
+
+
 }
 
 .check-in{
      width: 100%;
+       min-height: 48px;
+    height: auto;
 }
 
 
@@ -1453,14 +2089,20 @@ section{
 
 #filter-checkin{
     width: 100%;
+      min-height: 48px;
+    height: auto;
   
 }
 .check-out{
     width: 100%;
+      min-height: 48px;
+    height: auto;
 }
 
 #filter-checkout{
     width: 100%;
+      min-height: 48px;
+    height: auto;
 }
 
 .guests{
@@ -1503,23 +2145,28 @@ section{
 #filter-btn{
     width: 100%;
     margin: 5%;
+    min-height: 48px;
+    height: auto;
 }
 
 #reset-btn{
     width: 100%;
+      min-height: 48px;
+    height: auto;
 }
 
 
 article{
     margin: none;
     width: 95vw;
+   
 }
  .card-container{
     display: flex;
     flex-direction: column;
     width: 87vw;
     height: auto;
-} 
+ }
 
 
 img{
@@ -1588,5 +2235,180 @@ footer{
     width: 100%;
 }
 
+
+
+
+
+
+
+
+    .log {
+        display: none;
+    }
+
+
+.nav-overlay #mobileLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+max-height: 48px;
+    width: 150px;
+    padding: 12px 20px;
+ position: absolute;
+    top:48px;
+    right: 16px;
+    border: none;
+    border-radius: 8px;
+    background: #0365b0;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
+.nav-overlay #mobileLoginButton .login {
+    width: 20px;
+    height: 20px;
+}
+
+ 
+
+.auth-close{
+    font-size: 16px;
+}
+
+
+
+
+
+    .auth-popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+
+        width: 100%;
+        height: 100vh;
+
+        padding: 15px;
+
+        justify-content: center;
+        align-items: center;
+
+        z-index: 9999;
+    }
+.auth-popup-content {
+    position: relative;
+
+    width: 290px !important;
+    max-width: 290px !important;
+
+    min-width: 0 !important;
+
+    min-height: 320px;
+    height: auto;
+
+    padding: 55px 20px 30px;
+
+    background: white;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+    #authContent {
+        width: 100%;
+        display: block;
+    }
+
+    .auth-choice {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 16px;
+
+        text-align: center;
+    }
+
+    .auth-choice .go {
+        width: 150px;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 15px;
+    }
+
+    .auth-choice-btn {
+        display: block !important;
+
+        width: 100%;
+        max-width: 240px;
+
+        min-height: 48px;
+
+        margin: 0;
+        padding: 12px 16px;
+
+        background: white;
+        color: rgb(3, 101, 176);
+
+        border: 1px solid rgb(3, 101, 176);
+        border-radius: 10px;
+
+        font-size: 16px;
+        font-weight: 500;
+
+        cursor: pointer;
+    }
+
+    .auth-choice-btn:hover {
+        background: rgb(3, 79, 137);
+        color: white;
+    }
+
+    .auth-close {
+        top: 8px;
+        right: 8px;
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 16px;
+    }
+
+
+
+
+
+}
+
+
+
+@media screen and (max-width: 350px) {
+
+    .flatpickr-calendar {
+        width: calc(100vw - 10px) !important;
+        max-width: calc(100vw - 10px) !important;
+        left: 5px !important;
+        right: 5px !important;
+    }
+
+    .flatpickr-day {
+        height: 32px !important;
+        line-height: 32px !important;
+        font-size: 11px;
+    
+        
+    }
+}

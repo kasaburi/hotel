@@ -34,38 +34,49 @@
                     <li><a href="./hotel.html">Hotels</a></li>
                     <li><a href="./bookedrooms.html">Booked Rooms</a></li>
                 </ul>
+                  <div class="log">
+                    <button type="button" id="btnLoginRegister">Login
+                        <img src="./image/login.svg" class="login">
+                    </button>
+                </div>
+                <div id="authPopup" class="auth-popup">
+                    <div class="auth-popup-content">
+                        <button type="button" id="btnClose" class="auth-close"> ❌</button>
+                        <div id="authContent"></div>
+                    </div>
+                </div>
             </nav>
         </header>
         <main>
             <section id="section">
-                <div id="roomTypeContainer" ></div><hr />
-                <form id="filter-form">
-                    <div class="price">
-                        <div class="price-label">Price Per Night</div>
-                        <div id="price-slider"></div>
-                        <div  id="filter-price-to"  class="price-boxes">
-                            <span class="price-value" id="min-price">0</span>
-                            <span class="dash">-</span>
-                            <span class="price-value" id="max-price">1000</span>
+                <div id="roomTypeContainer"></div>
+                <hr>
+                    <form id="filter-form">
+                        <div class="price">
+                            <div class="price-label">
+                                Price Per Night
+                            </div>
+                            <div id="price-slider"></div>
+                            <div id="filter-price-to" class="price-boxes">
+                                <span class="price-value" id="min-price">0</span>
+                                <span class="dash">-</span>
+                                <span class="price-value" id="max-price"> 1000</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="type">
-                        <label for="filter-room-type">  Room type 
+                        <div class="type">
+                            <label for="filter-room-type"> Room type
                             <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ აირჩიოთ ოთახის ტიპი."></i>
                         </label>
                         <select id="filter-room-type">
-                            <option value="">select a room</option>
-                            <option value="1">Single Room</option>
-                            <option value="2">Double Room</option>
-                            <option value="3">Deluxe Room</option>
+                            <option value="">All rooms</option>
                         </select>
                     </div>
                     <div class="check-in">
                         <label for="filter-checkin">Check-in
-                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ მიუთითეთ ჩასვლის თარიღი."></i>
+                            <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ მიუთითეთ ჩასვლის თარიღი." ></i>
                         </label>
                         <div class="date-wrapper">
-                            <input type="data" id="filter-checkin" placeholder="check-in">
+                            <input  type="text"  id="filter-checkin" placeholder="check-in" >
                         </div>
                     </div>
                     <div class="check-out">
@@ -73,41 +84,43 @@
                             <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="გთხოვთ მიუთითეთ გასვლის თარიღი."></i>
                         </label>
                         <div class="date-wrapper">
-                            <input type="text" id="filter-checkout" placeholder="check-out">
+                           <input type="text" id="filter-checkout" placeholder="check-out">
                         </div>
                     </div>
                     <div class="guests">
                         <div class="guests-wrapper">
-                            <label for="guestsInput" class="label-guests">Guests 
-                                 <i class="fa-solid fa-user-plus fa-sm" style="color: #74C0FC;"></i> 
+                            <label for="guestsInput" class="label-guests" >Guests
+                                <i class="fa-solid fa-user-plus fa-sm" style="color: #74C0FC;"></i>
                             </label>
-                            <input type="text" id="guestsInput" readonly value="1" onclick="toggleGuestPopup()">
+                            <input  type="text"  id="guestsInput" readonly value="1" onclick="toggleGuestPopup()" >
                         </div>
                         <div id="guestPopup" class="guest-popup">
-                            <label for="adultSelect">Adults
-                                <i class="fa-solid fa-circle-exclamation warning-icon" style="color: #c7c7c7;" data-tooltip="აირჩიეთ სტუმრების რაოდენობა."></i>
+                            <label for="adultSelect"> Adults
+                                <i class="fa-solid fa-circle-exclamation warning-icon"  style="color: #c7c7c7;" data-tooltip="აირჩიეთ სტუმრების რაოდენობა."></i>
                             </label>
                             <select id="adultSelect">
-                                <option value="1">1 adult</option>
+                                <option value="1"> 1 adult</option>
                                 <option value="2">2 adults</option>
-                                <option value="3">3 adults</option>
-                                <option value="4">4 adults</option>
-                                <option value="5">5 adults</option>
+                                <option value="3"> 3 adults</option>
+                                <option value="4"> 4 adults</option>
+                                <option value="5"> 5 adults</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" id="filter-btn">APPLY FiLTER</button>
-                        <button type="button" id="reset-btn">RESET</button>
+                        <button type="button"id="filter-btn" >APPLY FILTER</button>
+                        <button type="button"id="reset-btn">RESET</button>
                     </div>
-                </form><hr />   
+                </form>
+                <hr>
             </section>
             <article>
                 <div id="roomsContainer"></div>
+                 <div id="pagination"></div>
                 <div id="roomResults"></div>
             </article>
         </main>
-         <footer>
+        <footer>
             <div class="content1">
                 <p>© 2023 IT Academy Step All; Rights Reserved</p>
                 <div class="content3">
