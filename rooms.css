@@ -202,7 +202,9 @@ section{
 }
 
 .card h3 {
-    width: 12vw;
+    display: flex;
+    align-items: center;
+    width: 30vw;
     padding-left: 5%;
     margin-top: 10px;
     font-size: 16px;
@@ -227,7 +229,7 @@ section{
       position: relative;
      overflow: hidden;
     width:100%; 
-    min-height: 40%;
+    max-height: 40vh;
     object-fit:cover; 
    
 }
@@ -273,9 +275,11 @@ section{
 .cardbody{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color:rgba(3, 101, 176, 0.052);
     border: none;
-    width: 8vw;
+    width: 15vw;
     text-align: center;
 
 }
@@ -1579,7 +1583,7 @@ article{
 
 
 img{
-    min-height: 35vh; 
+    max-height: 35vh; 
    height: auto;
  
  }  
@@ -1661,6 +1665,7 @@ width: 70px;
 .navbar{
     height: 12vh;
 }
+
 
 
 
@@ -1819,7 +1824,7 @@ article{
 
 
 img{
-    min-height: 35vh; 
+    max-height: 35vh; 
    height: auto;
  
  }  
@@ -2170,7 +2175,7 @@ article{
 
 
 img{
-    min-height: 35vh; 
+    max-height: 35vh; 
    height: auto;
  
  }  
@@ -2187,10 +2192,12 @@ img{
 
 .cardbody{
     width: 100px;
+
 }
 
 h3{
-    min-width: 130px !important;
+    min-width: 45vw !important;
+
 }
 .card1{
     min-height: 10vh;
