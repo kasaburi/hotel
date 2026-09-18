@@ -1141,7 +1141,8 @@ main{
 }
 
 #section{
-  min-height: 150vh;
+  min-height: 160vh;
+  height: auto;
 }
 .cardbody{
   max-height: 10vh;

@@ -675,17 +675,15 @@ h2{
 
 
 
-.row,
-.row1{
+.row{
    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
      width: 100%;
-     gap: 16px;
+     gap: 16px ;
 }
-
 
 
 
@@ -710,25 +708,46 @@ h2{
 }
 
 
-.field,
-.field2{
+.field
+{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     height: auto;
+   
 }
 
-
+.field2{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 160px;
+    height: auto;
+     
+}
 
 .field1{
    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    width: 160px;
     height: auto;
 
   
 }
+.row1{
+       display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+     width: 100%;
+     gap: 16px ;
+}
+
+
+
 
 .firstName{
     border: 1px solid gray;
@@ -753,7 +772,7 @@ h2{
 .age{
       border: 1px solid gray;
     height: 48px;
-    width: 160px;
+    min-width: 160px;
     text-align: center;
     margin-top: 4%;
     border-radius: 8px;
@@ -762,7 +781,7 @@ h2{
 #gender{
    border: 1px solid gray;
     height: 48px;
-    width: 230px;
+    min-width: 160px;
     text-align: center;
     margin-top: 4%;
     border-radius: 8px;

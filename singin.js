@@ -1,2525 +1,567 @@
 // =========================================================
-// NAVIGATION / HAMBURGER
+// 1. NAVIGATION & HAMBURGER
 // =========================================================
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
 
-const hamburger =
-    document.getElementById("hamburger");
-
-const navLinks =
-    document.getElementById("navLinks");
-
-
-// =========================================================
-// MOBILE OVERLAY
-// =========================================================
-
-const overlay =
-    document.createElement("div");
-
+const overlay = document.createElement("div");
 overlay.classList.add("nav-overlay");
-
 overlay.innerHTML = `
-    <a href="./index.html">Home</a>
-
-    <a href="./rooms.html">Rooms</a>
-
-    <a href="./hotel.html">Hotels</a>
-
-    <a href="./bookedrooms.html">Booked Rooms</a>
-
-    <button
-        type="button"
-        id="mobileLogin"
-    >
-        Login
-
-        <img
-            src="./image/login.svg"
-            class="login"
-            alt="Login"
-        >
-    </button>
+  <a href="./index.html">Home</a>
+  <a href="./rooms.html">Rooms</a>
+  <a href="./hotel.html">Hotels</a>
+  <a href="./bookedrooms.html">Booked Rooms</a>
+  <button type="button" id="mobileLogin">
+    <span>Login</span>
+    <img src="./image/login.svg" class="login" alt="Login">
+  </button>
 `;
-
 document.body.appendChild(overlay);
 
-
-// =========================================================
-// AUTH ELEMENTS
-// =========================================================
-
-const btnLoginRegister =
-    document.getElementById(
-        "btnLoginRegister"
-    );
-
-const authPopup =
-    document.getElementById(
-        "authPopup"
-    );
-
-const authContent =
-    document.getElementById(
-        "authContent"
-    );
-
-const btnClose =
-    document.getElementById(
-        "btnClose"
-    );
-
-
-// =========================================================
-// TOKEN
-// =========================================================
+const mobileLogin = overlay.querySelector("#mobileLogin");
+const desktopLogin = document.getElementById("btnLoginRegister");
+const authPopup = document.getElementById("authPopup");
+const authContent = document.getElementById("authContent");
+const popupContent = document.querySelector(".auth-popup-content");
+const btnClose = document.getElementById("btnClose");
 
 function getToken() {
-
-    return localStorage.getItem(
-        "token"
-    );
-
+  return localStorage.getItem("token") || localStorage.getItem("userToken");
 }
-
-
-// =========================================================
-// HAMBURGER OPEN
-// =========================================================
 
 if (hamburger) {
-
-    hamburger.addEventListener(
-        "click",
-        () => {
-
-            hamburger.style.display =
-                "none";
-
-            overlay.classList.add(
-                "active"
-            );
-
-        }
-    );
-
+  hamburger.addEventListener("click", () => {
+    hamburger.style.display = "none";
+    overlay.classList.add("active");
+  });
 }
 
+function closeMobileMenu() {
+  overlay.classList.remove("active");
+  if (hamburger) {
+    hamburger.style.display = "block";
+  }
+}
+
+overlay.addEventListener("click", (event) => {
+  if (event.target.closest("#mobileLogin")) return;
+  closeMobileMenu();
+});
 
 // =========================================================
-// AUTH POPUP
+// 2. AUTHENTICATION & LOGIN POPUP
 // =========================================================
-
 function openAuthPopup() {
+  closeMobileMenu();
+  if (!authPopup || !authContent) return;
 
-    if (
-        !authPopup ||
-        !authContent
-    ) {
+  authPopup.style.display = "flex";
+  authPopup.classList.add("active");
 
-        console.error(
-            "❌ Auth popup ვერ მოიძებნა."
-        );
+  if (popupContent) {
+    popupContent.classList.remove("registration-popup", "authorization-popup");
+  }
 
-        return;
+  authContent.innerHTML = `
+    <div class="auth-choice">
+      <div class="go">
+        Login
+        <img src="./image/login.svg" class="login" alt="Login">
+      </div>
+      <button type="button" id="popupLogin" class="auth-choice-btn">Authorization</button>
+      <button type="button" id="popupRegister" class="auth-choice-btn">Registration</button>
+    </div>
+  `;
 
-    }
+  document.getElementById("popupLogin")?.addEventListener("click", () => {
+    closeAuthPopup();
+    window.location.href = "./singin.html";
+  });
 
-
-    authContent.innerHTML = `
-
-        <div class="auth-choice">
-
-            <div class="go">
-
-                Login
-
-                <img
-                    src="./image/login.svg"
-                    class="login"
-                    alt="Login"
-                >
-
-            </div>
-
-
-            <button
-                type="button"
-                id="popupLogin"
-                class="auth-choice-btn"
-            >
-                Authorization
-            </button>
-
-
-            <button
-                type="button"
-                id="popupRegister"
-                class="auth-choice-btn"
-            >
-                Registration
-            </button>
-
-        </div>
-
-    `;
-
-
-    authPopup.style.display =
-        "flex";
-
-
-    // =====================================================
-    // AUTHORIZATION
-    // =====================================================
-
-    const popupLogin =
-        document.getElementById(
-            "popupLogin"
-        );
-
-    if (popupLogin) {
-
-        popupLogin.addEventListener(
-            "click",
-            () => {
-
-                window.location.href =
-                    "./singin.html";
-
-            }
-        );
-
-    }
-
-
-    // =====================================================
-    // REGISTRATION
-    // =====================================================
-
-    const popupRegister =
-        document.getElementById(
-            "popupRegister"
-        );
-
-    if (popupRegister) {
-
-        popupRegister.addEventListener(
-            "click",
-            () => {
-
-                window.location.href =
-                    "./registre.html";
-
-            }
-        );
-
-    }
-
+  document.getElementById("popupRegister")?.addEventListener("click", () => {
+    closeAuthPopup();
+    window.location.href = "./registre.html";
+  });
 }
-
-
-// =========================================================
-// CLOSE AUTH POPUP
-// =========================================================
 
 function closeAuthPopup() {
-
-    if (!authPopup) {
-        return;
-    }
-
-
-    authPopup.style.display =
-        "none";
-
-
-    if (authContent) {
-
-        authContent.innerHTML =
-            "";
-
-    }
-
+  if (!authPopup) return;
+  authPopup.style.display = "none";
+  authPopup.classList.remove("active");
+  if (authContent) authContent.innerHTML = "";
 }
-
-
-// =========================================================
-// LOGOUT
-// =========================================================
 
 function logout() {
-
-    console.log(
-        "🚪 Logging out..."
-    );
-
-
-    // Remove authentication data
-
-    localStorage.removeItem(
-        "token"
-    );
-
-    localStorage.removeItem(
-        "userId"
-    );
-
-    localStorage.removeItem(
-        "userEmail"
-    );
-
-
-    console.log(
-        "✅ Logout successful"
-    );
-
-
-    // Redirect to home
-
-    window.location.href =
-        "./index.html";
-
+  localStorage.removeItem("token");
+  localStorage.removeItem("userToken");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userEmail");
+  updateAuthButton();
+  window.location.href = "./index.html";
 }
-
-
-// =========================================================
-// UPDATE DESKTOP LOGIN / LOGOUT BUTTON
-// =========================================================
 
 function updateAuthButton() {
+  const token = getToken();
+  const isAuth = !!token;
+  const btnText = isAuth ? "Log Out" : "Login";
 
-    if (!btnLoginRegister) {
+  if (desktopLogin) {
+    desktopLogin.innerHTML = `
+      ${btnText}
+      <img src="./image/login.svg" class="login" alt="${btnText}">
+    `;
+    desktopLogin.onclick = isAuth ? logout : openAuthPopup;
+  }
 
-        console.log(
-            "ℹ️ btnLoginRegister ამ გვერდზე არ არის."
-        );
-
-        return;
-
-    }
-
-
-    const token =
-        getToken();
-
-
-    console.log(
-        "🔐 Current token:",
-        token
-    );
-
-
-    // =====================================================
-    // LOGGED IN
-    // =====================================================
-
-    if (token) {
-
-        btnLoginRegister.innerHTML = `
-
-            Log Out
-
-            <img
-                src="./image/login.svg"
-                class="login"
-                alt="Log Out"
-            >
-
-        `;
-
-
-        // Remove old event
-
-        btnLoginRegister.onclick =
-            null;
-
-
-        // Add logout
-
-        btnLoginRegister.onclick =
-            () => {
-
-                logout();
-
-            };
-
-
-        console.log(
-            "✅ Log Out ღილაკი ჩაიტვირთა."
-        );
-
-    }
-
-
-    // =====================================================
-    // NOT LOGGED IN
-    // =====================================================
-
-    else {
-
-        btnLoginRegister.innerHTML = `
-
-            Login
-
-            <img
-                src="./image/login.svg"
-                class="login"
-                alt="Login"
-            >
-
-        `;
-
-
-        // Remove old event
-
-        btnLoginRegister.onclick =
-            null;
-
-
-        // Add login popup
-
-        btnLoginRegister.onclick =
-            () => {
-
-                openAuthPopup();
-
-            };
-
-
-        console.log(
-            "🔐 Login ღილაკი ჩაიტვირთა."
-        );
-
-    }
-
+  if (mobileLogin) {
+    mobileLogin.innerHTML = `
+      <span>${btnText}</span>
+      <img src="./image/login.svg" class="login" alt="${btnText}">
+    `;
+    mobileLogin.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isAuth) logout();
+      else openAuthPopup();
+    };
+  }
 }
 
-
-// =========================================================
-// UPDATE MOBILE LOGIN / LOGOUT BUTTON
-// =========================================================
-
-function updateMobileAuthButton() {
-
-    const mobileLogin =
-        document.getElementById(
-            "mobileLogin"
-        );
-
-
-    if (!mobileLogin) {
-        return;
-    }
-
-
-    const token =
-        getToken();
-
-
-    // =====================================================
-    // LOGGED IN
-    // =====================================================
-
-    if (token) {
-
-        mobileLogin.innerHTML = `
-
-            Log Out
-
-            <img
-                src="./image/login.svg"
-                class="login"
-                alt="Log Out"
-            >
-
-        `;
-
-    }
-
-
-    // =====================================================
-    // NOT LOGGED IN
-    // =====================================================
-
-    else {
-
-        mobileLogin.innerHTML = `
-
-            Login
-
-            <img
-                src="./image/login.svg"
-                class="login"
-                alt="Login"
-            >
-
-        `;
-
-    }
-
-}
-
-
-// =========================================================
-// MOBILE LOGIN / LOGOUT CLICK
-// =========================================================
-
-document.addEventListener(
-    "click",
-    (event) => {
-
-        const mobileButton =
-            event.target.closest(
-                "#mobileLogin"
-            );
-
-
-        if (!mobileButton) {
-            return;
-        }
-
-
-        event.preventDefault();
-
-        event.stopPropagation();
-
-
-        const token =
-            getToken();
-
-
-        // =================================================
-        // LOGGED IN → LOGOUT
-        // =================================================
-
-        if (token) {
-
-            logout();
-
-            return;
-
-        }
-
-
-        // =================================================
-        // NOT LOGGED IN → OPEN LOGIN POPUP
-        // =================================================
-
-        overlay.classList.remove(
-            "active"
-        );
-
-
-        if (hamburger) {
-
-            hamburger.style.display =
-                "block";
-
-        }
-
-
-        openAuthPopup();
-
-    }
-);
-
-
-// =========================================================
-// CLOSE AUTH POPUP BUTTON
-// =========================================================
-
-if (btnClose) {
-
-    btnClose.addEventListener(
-        "click",
-        () => {
-
-            closeAuthPopup();
-
-        }
-    );
-
-}
-
-
-// =========================================================
-// CLOSE POPUP WHEN CLICKING OUTSIDE
-// =========================================================
-
+if (btnClose) btnClose.addEventListener("click", closeAuthPopup);
 if (authPopup) {
-
-    authPopup.addEventListener(
-        "click",
-        (event) => {
-
-            if (
-                event.target ===
-                authPopup
-            ) {
-
-                closeAuthPopup();
-
-            }
-
-        }
-    );
-
+  authPopup.addEventListener("click", (event) => {
+    if (event.target === authPopup) closeAuthPopup();
+  });
 }
-
-
-// =========================================================
-// ESC → CLOSE POPUP
-// =========================================================
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (
-            event.key ===
-            "Escape"
-        ) {
-
-            closeAuthPopup();
-
-        }
-
-    }
-);
-
-
-// =========================================================
-// CLOSE MOBILE OVERLAY
-// =========================================================
-
-overlay.addEventListener(
-    "click",
-    (event) => {
-
-        // Don't close when clicking Login / Logout
-
-        if (
-            event.target.closest(
-                "#mobileLogin"
-            )
-        ) {
-
-            return;
-
-        }
-
-
-        overlay.classList.remove(
-            "active"
-        );
-
-
-        if (hamburger) {
-
-            hamburger.style.display =
-                "block";
-
-        }
-
-    }
-);
-
-
-// =========================================================
-// INITIAL AUTH STATE
-// =========================================================
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeAuthPopup();
+});
 
 updateAuthButton();
 
-updateMobileAuthButton();
-
-
 // =========================================================
-// LOGIN PAGE
+// 3. LOGIN PAGE LOGIC (მხოლოდ თუ loginForm არსებობს)
 // =========================================================
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  if (!form) return;
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+  const errBox = document.getElementById("loginError");
+  const okBox = document.getElementById("loginSuccess");
 
-        const form =
-            document.getElementById(
-                "loginForm"
-            );
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        const errBox =
-            document.getElementById(
-                "loginError"
-            );
+    if (errBox) {
+      errBox.textContent = "";
+      errBox.style.display = "none";
+    }
+    if (okBox) {
+      okBox.textContent = "";
+      okBox.style.display = "none";
+    }
 
-        const okBox =
-            document.getElementById(
-                "loginSuccess"
-            );
+    const email = document.getElementById("email")?.value.trim() || "";
+    const password = document.getElementById("password")?.value.trim() || "";
 
+    if (!email || !password) {
+      if (errBox) {
+        errBox.textContent = "შეიყვანე email და password";
+        errBox.style.display = "block";
+      }
+      return;
+    }
 
-        // =================================================
-        // IF THIS IS NOT LOGIN PAGE
-        // =================================================
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
 
-        if (!form) {
+    try {
+      const res = await fetch("https://hotel-backend-qeue.onrender.com/auth/sign_in", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
 
-            console.log(
-                "ℹ️ loginForm ამ გვერდზე არ არის."
-            );
+      const data = await res.json().catch(() => ({}));
 
-            return;
-
+      if (!res.ok) {
+        if (errBox) {
+          errBox.textContent = data.detail || data.message || "Login failed.";
+          errBox.style.display = "block";
         }
-
-
-        // =================================================
-        // LOGIN SUBMIT
-        // =================================================
-
-        form.addEventListener(
-            "submit",
-            async (e) => {
-
-                e.preventDefault();
-
-
-                // =========================================
-                // CLEAR OLD MESSAGES
-                // =========================================
-
-                if (errBox) {
-
-                    errBox.textContent =
-                        "";
-
-                    errBox.style.display =
-                        "none";
-
-                }
-
-
-                if (okBox) {
-
-                    okBox.textContent =
-                        "";
-
-                    okBox.style.display =
-                        "none";
-
-                }
-
-
-                // =========================================
-                // INPUTS
-                // =========================================
-
-                const emailInput =
-                    document.getElementById(
-                        "email"
-                    );
-
-                const passwordInput =
-                    document.getElementById(
-                        "password"
-                    );
-
-
-                const email =
-                    emailInput
-                        ? emailInput.value.trim()
-                        : "";
-
-
-                const password =
-                    passwordInput
-                        ? passwordInput.value.trim()
-                        : "";
-
-
-                // =========================================
-                // VALIDATION
-                // =========================================
-
-                if (
-                    !email ||
-                    !password
-                ) {
-
-                    if (errBox) {
-
-                        errBox.textContent =
-                            "შეიყვანე email და password";
-
-                        errBox.style.display =
-                            "block";
-
-                    }
-
-                    return;
-
-                }
-
-
-                // =========================================
-                // DISABLE SUBMIT
-                // =========================================
-
-                const submitButton =
-                    form.querySelector(
-                        'button[type="submit"]'
-                    );
-
-
-                if (submitButton) {
-
-                    submitButton.disabled =
-                        true;
-
-                }
-
-
-                // =========================================
-                // LOGIN REQUEST
-                // =========================================
-
-                try {
-
-                    const res =
-                        await fetch(
-                            "https://hotel-backend-qeue.onrender.com/auth/sign_in",
-                            {
-                                method: "POST",
-
-                                headers: {
-                                    "Content-Type":
-                                        "application/json"
-                                },
-
-                                body:
-                                    JSON.stringify(
-                                        {
-                                            email:
-                                                email,
-
-                                            password:
-                                                password
-                                        }
-                                    )
-                            }
-                        );
-
-
-                    // =====================================
-                    // RESPONSE
-                    // =====================================
-
-                    const data =
-                        await res
-                            .json()
-                            .catch(
-                                () => ({})
-                            );
-
-
-                    console.log(
-                        "🔐 Login response:",
-                        data
-                    );
-
-
-                    // =====================================
-                    // LOGIN ERROR
-                    // =====================================
-
-                    if (!res.ok) {
-
-                        console.error(
-                            "❌ Login error:",
-                            data
-                        );
-
-
-                        if (errBox) {
-
-                            errBox.textContent =
-                                data.detail ||
-                                data.message ||
-                                data.error ||
-                                "Login failed.";
-
-                            errBox.style.display =
-                                "block";
-
-                        }
-
-
-                        if (submitButton) {
-
-                            submitButton.disabled =
-                                false;
-
-                        }
-
-
-                        return;
-
-                    }
-
-
-                    // =====================================
-                    // TOKEN CHECK
-                    // =====================================
-
-                    if (!data.token) {
-
-                        console.error(
-                            "❌ Backend-მა token არ დააბრუნა:",
-                            data
-                        );
-
-
-                        if (errBox) {
-
-                            errBox.textContent =
-                                "Login was successful, but JWT token was not received.";
-
-                            errBox.style.display =
-                                "block";
-
-                        }
-
-
-                        if (submitButton) {
-
-                            submitButton.disabled =
-                                false;
-
-                        }
-
-
-                        return;
-
-                    }
-
-
-                    // =====================================
-                    // SAVE JWT TOKEN
-                    // =====================================
-
-                    localStorage.setItem(
-                        "token",
-                        data.token
-                    );
-
-
-                    console.log(
-                        "✅ JWT token saved."
-                    );
-
-
-                    // =====================================
-                    // SAVE USER ID
-                    // =====================================
-
-                    if (
-                        data.userId !==
-                        undefined
-                    ) {
-
-                        localStorage.setItem(
-                            "userId",
-                            String(
-                                data.userId
-                            )
-                        );
-
-                    }
-
-
-                    // =====================================
-                    // SAVE USER EMAIL
-                    // =====================================
-
-                    localStorage.setItem(
-                        "userEmail",
-                        data.userEmail ||
-                        email
-                    );
-
-
-                    // =====================================
-                    // CHECK SAVED TOKEN
-                    // =====================================
-
-                    console.log(
-                        "🔐 Saved token:",
-                        localStorage.getItem(
-                            "token"
-                        )
-                    );
-
-
-                    // =====================================
-                    // SUCCESS MESSAGE
-                    // =====================================
-
-                    if (okBox) {
-
-                        okBox.textContent =
-                            "You have successfully logged in!";
-
-                        okBox.style.display =
-                            "block";
-
-                    }
-
-
-                    // =====================================
-                    // REDIRECT AFTER SUCCESS
-                    // =====================================
-
-                    setTimeout(
-                        () => {
-
-                            window.location.href =
-                                "./bookedrooms.html";
-
-                        },
-                        700
-                    );
-
-                }
-
-
-                // =========================================
-                // NETWORK ERROR
-                // =========================================
-
-                catch (err) {
-
-                    console.error(
-                        "❌ Network error:",
-                        err
-                    );
-
-
-                    if (errBox) {
-
-                        errBox.textContent =
-                            "Network problem, try again.";
-
-                        errBox.style.display =
-                            "block";
-
-                    }
-
-
-                    if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
-                    }
-
-                }
-
-            }
-        );
-
+        if (submitButton) submitButton.disabled = false;
+        return;
+      }
+
+      if (!data.token) {
+        if (errBox) {
+          errBox.textContent = "Login წარმატებულია, მაგრამ Token ვერ მოიძებნა.";
+          errBox.style.display = "block";
+        }
+        if (submitButton) submitButton.disabled = false;
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      if (data.userId) localStorage.setItem("userId", String(data.userId));
+      localStorage.setItem("userEmail", data.userEmail || email);
+
+      if (okBox) {
+        okBox.textContent = "წარმატებით გაიარეთ ავტორიზაცია!";
+        okBox.style.display = "block";
+      }
+
+      setTimeout(() => {
+        window.location.href = "./bookedrooms.html";
+      }, 700);
+    } catch (err) {
+      if (errBox) {
+        errBox.textContent = "ქსელის შეცდომა, სცადეთ მოგვიანებით.";
+        errBox.style.display = "block";
+      }
+      if (submitButton) submitButton.disabled = false;
     }
-);
-
-
-// =========================================================
-// BOOKED ROOMS / BOOKING SECTION
-// =========================================================
-
-const citiesContainer =
-    document.getElementById(
-        "city"
-    );
-
-const container =
-    document.getElementById(
-        "container"
-    );
-
-const statusDiv =
-    document.getElementById(
-        "status"
-    );
-
-
-const API_BASE =
-    "https://hotel-backend-qeue.onrender.com";
-
-
-const HOTELS_API =
-    `${API_BASE}/api/hotels`;
-
-
-const BOOKINGS_API =
-    `${API_BASE}/api/Booking`;
-
-
-const HOTEL_PLACEHOLDER =
-    "https://via.placeholder.com/100x60?text=No+Hotel+Image";
-
-
-const ROOM_PLACEHOLDER =
-    "https://via.placeholder.com/80x60?text=No+Room+Image";
-
+  });
+});
 
 // =========================================================
-// TOKEN HELPERS
+// 4. BOOKED ROOMS PAGE LOGIC (მხოლოდ თუ ცხრილი არსებობს)
 // =========================================================
-
-function getBookingToken() {
-
-    return localStorage.getItem(
-        "token"
-    );
-
-}
-
-
-function getAuthHeaders() {
-
-    const token =
-        getBookingToken();
-
-
-    if (!token) {
-
-        console.error(
-            "❌ JWT token not found."
-        );
-
-
-        return {
-            "Content-Type":
-                "application/json"
-        };
-
-    }
-
-
-    return {
-
-        "Content-Type":
-            "application/json",
-
-        "Authorization":
-            `Bearer ${token}`
-
-    };
-
-}
-
-
-// =========================================================
-// FETCH DATA
-// =========================================================
-
-async function fetchData(
-    url,
-    options = {}
-) {
-
-    const response =
-        await fetch(
-            url,
-            options
-        );
-
-
-    const data =
-        await response
-            .json()
-            .catch(
-                () => ({})
-            );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            data.detail ||
-            data.message ||
-            "Request failed."
-        );
-
-    }
-
-
-    return data;
-
-}
-
-
-// =========================================================
-// FETCH BOOKINGS
-// =========================================================
-
-async function fetchBookings() {
-
-    const token =
-        getBookingToken();
-
-
-    if (!token) {
-
-        throw new Error(
-            "გთხოვთ თავიდან გაიაროთ Login."
-        );
-
-    }
-
-
-    const response =
-        await fetch(
-            BOOKINGS_API,
-            {
-                method: "GET",
-
-                headers: {
-                    "Authorization":
-                        `Bearer ${token}`,
-
-                    "Content-Type":
-                        "application/json"
-                }
-            }
-        );
-
-
-    if (response.status === 401) {
-
-        localStorage.removeItem(
-            "token"
-        );
-
-        throw new Error(
-            "ავტორიზაცია ვადაგასულია. გთხოვთ თავიდან გაიაროთ Login."
-        );
-
-    }
-
-
-    const data =
-        await response
-            .json()
-            .catch(
-                () => ({})
-            );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            data.detail ||
-            data.message ||
-            "Booking data ვერ ჩაიტვირთა."
-        );
-
-    }
-
-
-    if (Array.isArray(data)) {
-
-        return data;
-
-    }
-
-
-    if (
-        data &&
-        Array.isArray(
-            data.bookings
-        )
-    ) {
-
-        return data.bookings;
-
-    }
-
-
-    return [];
-
-}
-
-
-// =========================================================
-// FORMAT PRICE
-// =========================================================
+const citiesContainer = document.getElementById("city");
+const container = document.getElementById("container");
+const statusDiv = document.getElementById("status");
+
+const API_BASE = "https://hotel-backend-qeue.onrender.com";
+const BOOKINGS_API = `${API_BASE}/api/Booking`;
+const HOTEL_PLACEHOLDER = "https://via.placeholder.com/100x60?text=No+Hotel+Image";
+const ROOM_PLACEHOLDER = "https://via.placeholder.com/80x60?text=No+Room+Image";
+
+let cachedBookings = [];
+let currentFilterCity = "all";
 
 function formatPrice(price) {
-
-    const number =
-        Number(price);
-
-
-    if (
-        Number.isNaN(
-            number
-        )
-    ) {
-
-        return "0 ₾";
-
-    }
-
-
-    return `${number} ₾`;
-
+  const number = Number(price);
+  return Number.isNaN(number) ? "0 ₾" : `${number} ₾`;
 }
 
-
-// =========================================================
-// FORMAT DATE
-// =========================================================
-
-function formatDate(
-    dateStr
-) {
-
-    if (!dateStr) {
-
-        return "-";
-
+function formatDate(dateStr) {
+  if (!dateStr) return "-";
+  const dateOnly = String(dateStr).split("T")[0];
+  const parts = dateOnly.split("-");
+  if (parts.length === 3) {
+    const year = Number(parts[0]);
+    const month = Number(parts[1]);
+    const day = Number(parts[2]);
+    if (!Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
+      return new Date(year, month - 1, day).toLocaleDateString("ka-GE");
     }
-
-
-    const date =
-        new Date(
-            dateStr
-        );
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "-";
-
-    }
-
-
-    return date.toLocaleDateString(
-        "ka-GE"
-    );
-
+  }
+  return dateStr;
 }
 
-
-// =========================================================
-// IMAGE URL
-// =========================================================
-
-function getImageUrl(
-    image
-) {
-
-    if (!image) {
-        return null;
-    }
-
-
-    if (
-        typeof image !==
-        "string"
-    ) {
-
-        return null;
-
-    }
-
-
-    if (
-        image.startsWith(
-            "http://"
-        ) ||
-        image.startsWith(
-            "https://"
-        )
-    ) {
-
-        return image;
-
-    }
-
-
-    return image;
-
+function getImageUrl(image) {
+  if (!image) return null;
+  if (typeof image === "string") return image.trim() || null;
+  if (typeof image === "object") return image.source || image.url || image.imageUrl || null;
+  return null;
 }
 
+function createHotelFromBooking(booking) {
+  const hotelImg =
+    getImageUrl(booking.hotelImages?.[0]) ||
+    getImageUrl(booking.hotel?.images?.[0]) ||
+    booking.hotelImage ||
+    booking.featuredImage ||
+    null;
 
-// =========================================================
-// HOTEL CELL
-// =========================================================
+  return {
+    id: booking.hotelId || booking.hotel_id || booking.hotel?.id,
+    name: booking.hotelName || booking.hotel?.name || "Unknown hotel",
+    city: booking.city || booking.hotelCity || booking.hotel?.city || "-",
+    featuredImage: hotelImg
+  };
+}
 
-function renderHotelCell(
-    hotel
-) {
+function createRoomFromBooking(booking) {
+  const roomImg =
+    getImageUrl(booking.roomImages?.[0]) ||
+    getImageUrl(booking.room?.images?.[0]) ||
+    booking.roomImage ||
+    null;
 
-    if (!hotel) {
+  return {
+    id: booking.roomId || booking.room_id || booking.room?.id,
+    name: booking.roomName || booking.roomTypeName || booking.room?.name || "Unknown room",
+    pricePerNight: booking.roomPricePerNight || booking.pricePerNight || booking.price || "",
+    image: roomImg
+  };
+}
 
-        return `
-            <div class="hotel-cell">
-                <span>No hotel information</span>
-            </div>
-        `;
+function getBookingStatus(booking) {
+  const status = String(booking.status || "").toLowerCase();
+  if (status.includes("cancel")) return "Cancelled";
+  if (status.includes("confirm") || status.includes("book")) return "Booked";
+  return "Pending";
+}
 
-    }
+function renderHotelCell(hotel) {
+  const image = hotel?.featuredImage || HOTEL_PLACEHOLDER;
+  const name = hotel?.name || "Unknown hotel";
+  const city = hotel?.city || "-";
 
+  return `
+    <div class="hotell hotel-cell" style="display:flex; align-items:center; gap:12px; max-width:300px;">
+      <img src="${image}" alt="${name}" class="img hotel-image" style="width:95px; height:65px; object-fit:cover; border-radius:8px;" onerror="this.onerror=null; this.src='${HOTEL_PLACEHOLDER}';">
+      <div class="hotelbox">
+        <strong class="hotelname" style="display:block; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</strong>
+        <small class="hotelcity" style="color:#888;">${city}</small>
+      </div>
+    </div>
+  `;
+}
 
-    const image =
-        getImageUrl(
-            hotel.featuredImage ||
-            hotel.image ||
-            hotel.imageUrl
-        ) ||
-        HOTEL_PLACEHOLDER;
+function renderRoomCell(room) {
+  const image = room?.image || ROOM_PLACEHOLDER;
+  const name = room?.name || "Unknown room";
+  const price = room?.pricePerNight;
 
+  return `
+    <div class="roomstyle room-cell" style="display:flex; align-items:center; gap:12px; max-width:300px;">
+      <img src="${image}" alt="${name}" class="imgroom room-image" style="width:85px; height:60px; object-fit:cover; border-radius:8px;" onerror="this.onerror=null; this.src='${ROOM_PLACEHOLDER}';">
+      <div class="roombox">
+        <strong class="roomname" style="display:block; max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</strong>
+        <small class="roomprice" style="color:#0365b0;">${formatPrice(price)} / night</small>
+      </div>
+    </div>
+  `;
+}
 
-    const name =
-        hotel.name ||
-        hotel.hotelName ||
-        "Unknown hotel";
+// გაუქმების მოდალი
+function showConfirmPopup(message, subMessage, bookingId, callback) {
+  document.getElementById("confirm-popup")?.remove();
 
-
-    const city =
-        hotel.city ||
-        hotel.location ||
-        "";
-
-
-    return `
-
-        <div class="hotel-cell">
-
-            <img
-                src="${image}"
-                alt="${name}"
-                class="hotel-image"
-                onerror="
-                    this.src='${HOTEL_PLACEHOLDER}'
-                "
-            >
-
-            <div>
-
-                <strong>
-                    ${name}
-                </strong>
-
-                ${
-                    city
-                        ? `<small>${city}</small>`
-                        : ""
-                }
-
-            </div>
-
+  const popup = document.createElement("div");
+  popup.id = "confirm-popup";
+  popup.className = "popup-overlay";
+  popup.innerHTML = `
+    <div class="popup-box">
+      <div class="popup-content">
+        <h3 class="popup-message">${message}</h3>
+        <p class="popup-sub">${subMessage}</p>
+        <div class="popup-buttons">
+          <button type="button" class="popup-btn confirm" id="confirmCancel">Yes</button>
+          <button type="button" class="popup-btn cancel" id="cancelPopup">No</button>
         </div>
+      </div>
+      <p class="popup-result" style="margin-top:10px; font-weight:bold; cursor:pointer; display:none;">Exit</p>
+    </div>
+  `;
+  document.body.appendChild(popup);
 
-    `;
+  const confirmBtn = document.getElementById("confirmCancel");
+  const cancelBtn = document.getElementById("cancelPopup");
+  const contentEl = popup.querySelector(".popup-content");
+  const resultEl = popup.querySelector(".popup-result");
 
+  resultEl?.addEventListener("click", () => popup.remove());
+  cancelBtn?.addEventListener("click", () => popup.remove());
+
+  confirmBtn?.addEventListener("click", async () => {
+    const token = getToken();
+    if (!token) return;
+
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = "Deleting...";
+
+    try {
+      const res = await fetch(`${BOOKINGS_API}/${bookingId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!res.ok) throw new Error("ჯავშანი ვერ გაუქმდა.");
+
+      contentEl.style.display = "none";
+      resultEl.textContent = "ჯავშანი წარმატებით გაუქმდა! (დააჭირეთ დასახურად)";
+      resultEl.style.color = "green";
+      resultEl.style.display = "block";
+
+      callback?.();
+    } catch (err) {
+      alert(err.message);
+      popup.remove();
+    }
+  });
 }
 
-
-// =========================================================
-// ROOM CELL
-// =========================================================
-
-function renderRoomCell(
-    room
-) {
-
-    if (!room) {
-
-        return `
-            <div class="room-cell">
-                <span>No room information</span>
-            </div>
-        `;
-
-    }
-
-
-    const image =
-        getImageUrl(
-            room.image ||
-            room.imageUrl ||
-            room.featuredImage
-        ) ||
-        ROOM_PLACEHOLDER;
-
-
-    const name =
-        room.roomTypeName ||
-        room.roomType ||
-        room.name ||
-        "Unknown room";
-
-
-    const price =
-        room.pricePerNight ||
-        room.price ||
-        room.price_per_night ||
-        "";
-
-
-    return `
-
-        <div class="room-cell">
-
-            <img
-                src="${image}"
-                alt="${name}"
-                class="room-image"
-                onerror="
-                    this.src='${ROOM_PLACEHOLDER}'
-                "
-            >
-
-            <div>
-
-                <strong>
-                    ${name}
-                </strong>
-
-                ${
-                    price !== ""
-                        ? `<small>${formatPrice(price)} / night</small>`
-                        : ""
-                }
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-// =========================================================
-// CREATE HOTEL FROM BOOKING
-// =========================================================
-
-function createHotelFromBooking(
-    booking
-) {
-
-    return {
-
-        id:
-            booking.hotelId ||
-            booking.hotel_id ||
-            booking.hotel?.id,
-
-        name:
-            booking.hotelName ||
-            booking.hotel?.name ||
-            "Unknown hotel",
-
-        city:
-            booking.city ||
-            booking.hotel?.city ||
-            booking.hotelCity ||
-            "",
-
-        featuredImage:
-            booking.hotelImage ||
-            booking.hotel?.featuredImage ||
-            booking.hotel?.image ||
-            booking.hotel?.imageUrl ||
-            null
-
-    };
-
-}
-
-
-// =========================================================
-// CREATE ROOM FROM BOOKING
-// =========================================================
-
-function createRoomFromBooking(
-    booking
-) {
-
-    return {
-
-        id:
-            booking.roomId ||
-            booking.room_id ||
-            booking.room?.id,
-
-        roomTypeName:
-            booking.roomTypeName ||
-            booking.room?.roomTypeName ||
-            booking.roomType ||
-            booking.room?.roomType ||
-            booking.room?.name ||
-            "Unknown room",
-
-        pricePerNight:
-            booking.pricePerNight ||
-            booking.room?.pricePerNight ||
-            booking.price ||
-            booking.room?.price ||
-            "",
-
-        image:
-            booking.roomImage ||
-            booking.room?.image ||
-            booking.room?.imageUrl ||
-            null
-
-    };
-
-}
-
-
-// =========================================================
-// BOOKING STATUS
-// =========================================================
-
-function getBookingStatus(
-    booking
-) {
-
-    const status =
-        String(
-            booking.status ||
-            booking.bookingStatus ||
-            ""
-        )
-        .toLowerCase();
-
-
-    if (
-        status.includes(
-            "cancel"
-        )
-    ) {
-
-        return "Cancelled";
-
-    }
-
-
-    if (
-        status.includes(
-            "confirm"
-        )
-    ) {
-
-        return "Confirmed";
-
-    }
-
-
-    if (
-        status.includes(
-            "book"
-        )
-    ) {
-
-        return "Booked";
-
-    }
-
-
-    if (
-        status.includes(
-            "pending"
-        )
-    ) {
-
-        return "Pending";
-
-    }
-
-
-    return (
-        booking.status ||
-        "Pending"
-    );
-
-}
-
-
-// =========================================================
-// CONFIRM POPUP
-// =========================================================
-
-function showConfirmPopup(
-    message,
-    subMessage,
+function cancelBooking(bookingId) {
+  if (!bookingId) return;
+
+  showConfirmPopup(
+    "Cancel reservation?",
+    `Are you sure you want to cancel booking #${bookingId}?`,
     bookingId,
-    callback
-) {
-
-    const oldPopup =
-        document.getElementById(
-            "confirm-popup"
-        );
-
-
-    if (oldPopup) {
-
-        oldPopup.remove();
-
-    }
-
-
-    const popup =
-        document.createElement(
-            "div"
-        );
-
-
-    popup.id =
-        "confirm-popup";
-
-
-    popup.className =
-        "popup-overlay";
-
-
-    popup.innerHTML = `
-
-        <div class="popup-box">
-
-            <div class="popup-content">
-
-                <h3>
-                    ${message}
-                </h3>
-
-                <p>
-                    ${subMessage}
-                </p>
-
-                <div class="popup-buttons">
-
-                    <button
-                        type="button"
-                        class="popup-btn confirm"
-                        id="confirmCancel"
-                    >
-                        Yes
-                    </button>
-
-                    <button
-                        type="button"
-                        class="popup-btn cancel"
-                        id="cancelPopup"
-                    >
-                        No
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    document.body.appendChild(
-        popup
-    );
-
-
-    const confirmButton =
-        document.getElementById(
-            "confirmCancel"
-        );
-
-    const cancelButton =
-        document.getElementById(
-            "cancelPopup"
-        );
-
-
-    // =====================================================
-    // CONFIRM CANCELLATION
-    // =====================================================
-
-    if (confirmButton) {
-
-        confirmButton.addEventListener(
-            "click",
-            async () => {
-
-                try {
-
-                    const token =
-                        getBookingToken();
-
-
-                    if (!token) {
-
-                        throw new Error(
-                            "გთხოვთ თავიდან გაიაროთ Login."
-                        );
-
-                    }
-
-
-                    const response =
-                        await fetch(
-                            `${BOOKINGS_API}/${bookingId}`,
-                            {
-                                method: "DELETE",
-
-                                headers: {
-                                    "Authorization":
-                                        `Bearer ${token}`,
-
-                                    "Content-Type":
-                                        "application/json"
-                                }
-                            }
-                        );
-
-
-                    const data =
-                        await response
-                            .json()
-                            .catch(
-                                () => ({})
-                            );
-
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            data.detail ||
-                            data.message ||
-                            "Reservation cancellation failed."
-                        );
-
-                    }
-
-
-                    popup.remove();
-
-
-                    showConfirmPopup(
-                        "Reservation cancelled",
-                        "The reservation has been cancelled successfully.",
-                        null,
-                        null
-                    );
-
-
-                    const successPopup =
-                        document.getElementById(
-                            "confirm-popup"
-                        );
-
-
-                    if (
-                        successPopup
-                    ) {
-
-                        const buttons =
-                            successPopup.querySelector(
-                                ".popup-buttons"
-                            );
-
-
-                        if (buttons) {
-
-                            buttons.innerHTML = `
-
-                                <button
-                                    type="button"
-                                    class="popup-btn confirm"
-                                    id="successClose"
-                                >
-                                    OK
-                                </button>
-
-                            `;
-
-                        }
-
-
-                        const successClose =
-                            document.getElementById(
-                                "successClose"
-                            );
-
-
-                        if (successClose) {
-
-                            successClose.addEventListener(
-                                "click",
-                                () => {
-
-                                    successPopup.remove();
-
-
-                                    if (
-                                        typeof callback ===
-                                        "function"
-                                    ) {
-
-                                        callback();
-
-                                    }
-
-                                }
-                            );
-
-                        }
-
-                    }
-
-                }
-                catch (error) {
-
-                    console.error(
-                        "Cancellation error:",
-                        error
-                    );
-
-
-                    alert(
-                        error.message ||
-                        "Reservation cancellation failed."
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    // =====================================================
-    // CLOSE
-    // =====================================================
-
-    if (cancelButton) {
-
-        cancelButton.addEventListener(
-            "click",
-            () => {
-
-                popup.remove();
-
-            }
-        );
-
-    }
-
-}
-
-
-// =========================================================
-// CANCEL BOOKING
-// =========================================================
-
-function cancelBooking(
-    bookingId
-) {
-
-    if (!bookingId) {
-
-        console.error(
-            "Booking ID ვერ მოიძებნა."
-        );
-
-        return;
-
-    }
-
-
-    showConfirmPopup(
-        "Cancel reservation?",
-        "Are you sure you want to cancel this reservation?",
-        bookingId,
-        () => {
-
-            loadBookings();
-
-        }
-    );
-
-}
-
-
-// =========================================================
-// LOAD CITIES
-// =========================================================
-
-async function loadCities() {
-
-    if (!citiesContainer) {
-        return;
-    }
-
-
-    try {
-
-        let cities = [];
-
-
-        // ================================================
-        // TRY HOTEL CITIES ENDPOINT
-        // ================================================
-
-        try {
-
-            const data =
-                await fetchData(
-                    `${HOTELS_API}/GetCities`
-                );
-
-
-            if (
-                Array.isArray(
-                    data
-                )
-            ) {
-
-                cities = data;
-
-            }
-            else if (
-                data &&
-                Array.isArray(
-                    data.cities
-                )
-            ) {
-
-                cities =
-                    data.cities;
-
-            }
-
-        }
-        catch (error) {
-
-            console.log(
-                "GetCities unavailable. Getting cities from bookings..."
-            );
-
-        }
-
-
-        // ================================================
-        // FALLBACK → BOOKINGS
-        // ================================================
-
-        if (
-            !cities.length
-        ) {
-
-            const bookings =
-                await fetchBookings();
-
-
-            cities = [
-                ...new Set(
-
-                    bookings
-                        .map(
-                            booking =>
-                                booking.city ||
-                                booking.hotel?.city ||
-                                booking.hotelCity
-                        )
-                        .filter(Boolean)
-
-                )
-            ];
-
-        }
-
-
-        // ================================================
-        // RENDER CITIES
-        // ================================================
-
-        citiesContainer.innerHTML =
-            "";
-
-
-        const allButton =
-            document.createElement(
-                "div"
-            );
-
-
-        allButton.className =
-            "city-item active";
-
-
-        allButton.textContent =
-            "All";
-
-
-        allButton.addEventListener(
-            "click",
-            () => {
-
-                document
-                    .querySelectorAll(
-                        ".city-item"
-                    )
-                    .forEach(
-                        item =>
-                            item.classList.remove(
-                                "active"
-                            )
-                    );
-
-
-                allButton.classList.add(
-                    "active"
-                );
-
-
-                loadBookings();
-
-            }
-        );
-
-
-        citiesContainer.appendChild(
-            allButton
-        );
-
-
-        cities.forEach(
-            city => {
-
-                const cityButton =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                cityButton.className =
-                    "city-item";
-
-
-                cityButton.textContent =
-                    city;
-
-
-                cityButton.addEventListener(
-                    "click",
-                    () => {
-
-                        document
-                            .querySelectorAll(
-                                ".city-item"
-                            )
-                            .forEach(
-                                item =>
-                                    item.classList.remove(
-                                        "active"
-                                    )
-                            );
-
-
-                        cityButton.classList.add(
-                            "active"
-                        );
-
-
-                        loadBookings(
-                            city
-                        );
-
-                    }
-                );
-
-
-                citiesContainer.appendChild(
-                    cityButton
-                );
-
-            }
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Cities error:",
-            error
-        );
-
-    }
-
-}
-
-
-// =========================================================
-// LOAD BOOKINGS
-// =========================================================
-
-async function loadBookings(
-    filterCity = null
-) {
-
-    if (!container) {
-        return;
-    }
-
-
-    if (statusDiv) {
-
-        statusDiv.textContent =
-            "Loading...";
-
-    }
-
-
-    try {
-
-        const bookings =
-            await fetchBookings();
-
-
-        // ================================================
-        // FILTER
-        // ================================================
-
-        const filteredBookings =
-            filterCity
-                ? bookings.filter(
-                    booking => {
-
-                        const city =
-                            booking.city ||
-                            booking.hotel?.city ||
-                            booking.hotelCity ||
-                            "";
-
-
-                        return (
-                            String(city)
-                                .toLowerCase() ===
-                            String(filterCity)
-                                .toLowerCase()
-                        );
-
-                    }
-                )
-                : bookings;
-
-
-        // ================================================
-        // EMPTY
-        // ================================================
-
-        if (
-            !filteredBookings.length
-        ) {
-
-            container.innerHTML = `
-                <div class="no-data">
-                    No data found.
-                </div>
-            `;
-
-
-            if (statusDiv) {
-
-                statusDiv.textContent =
-                    "";
-
-            }
-
-
-            return;
-
-        }
-
-
-        // ================================================
-        // TABLE
-        // ================================================
-
-        let html = `
-
-            <table class="booking-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Hotel
-                        </th>
-
-                        <th>
-                            Room
-                        </th>
-
-                        <th>
-                            Customer
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                        <th>
-                            Check in
-                        </th>
-
-                        <th>
-                            Check out
-                        </th>
-
-                        <th>
-                            Total Price
-                        </th>
-
-                        <th>
-                            Actions
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-        `;
-
-
-        // ================================================
-        // ROWS
-        // ================================================
-
-        filteredBookings.forEach(
-            booking => {
-
-                const hotel =
-                    createHotelFromBooking(
-                        booking
-                    );
-
-
-                const room =
-                    createRoomFromBooking(
-                        booking
-                    );
-
-
-                const bookingId =
-                    booking.id ||
-                    booking.bookingId ||
-                    booking.booking_id;
-
-
-                const customerName =
-                    booking.customerName ||
-                    booking.customer_name ||
-                    booking.name ||
-                    booking.user?.name ||
-                    "Unknown";
-
-
-                const checkIn =
-                    booking.checkIn ||
-                    booking.check_in ||
-                    booking.fromDate ||
-                    booking.startDate ||
-                    booking.start_date;
-
-
-                const checkOut =
-                    booking.checkOut ||
-                    booking.check_out ||
-                    booking.toDate ||
-                    booking.endDate ||
-                    booking.end_date;
-
-
-                const totalPrice =
-                    booking.totalPrice ||
-                    booking.total_price ||
-                    booking.price ||
-                    0;
-
-
-                const status =
-                    getBookingStatus(
-                        booking
-                    );
-
-
-                html += `
-
-                    <tr>
-
-                        <td>
-                            ${renderHotelCell(
-                                hotel
-                            )}
-                        </td>
-
-                        <td>
-                            ${renderRoomCell(
-                                room
-                            )}
-                        </td>
-
-                        <td>
-                            ${customerName}
-                        </td>
-
-                        <td>
-                            ${status}
-                        </td>
-
-                        <td>
-                            ${formatDate(
-                                checkIn
-                            )}
-                        </td>
-
-                        <td>
-                            ${formatDate(
-                                checkOut
-                            )}
-                        </td>
-
-                        <td>
-                            ${formatPrice(
-                                totalPrice
-                            )}
-                        </td>
-
-                        <td>
-
-                            <button
-                                type="button"
-                                class="cancel-booking"
-                                data-booking-id="${bookingId}"
-                            >
-                                Cancel
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        );
-
-
-        html += `
-
-                </tbody>
-
-            </table>
-
-        `;
-
-
-        container.innerHTML =
-            html;
-
-
-        // ================================================
-        // CANCEL BUTTONS
-        // ================================================
-
-        container
-            .querySelectorAll(
-                ".cancel-booking"
-            )
-            .forEach(
-                button => {
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            const bookingId =
-                                button.dataset
-                                    .bookingId;
-
-
-                            cancelBooking(
-                                bookingId
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-
-        if (statusDiv) {
-
-            statusDiv.textContent =
-                "";
-
-        }
-
-    }
-    catch (error) {
-
-        console.error(
-            "❌ Booking loading error:",
-            error
-        );
-
-
-        if (statusDiv) {
-
-            statusDiv.textContent =
-                error.message;
-
-        }
-
-
-        container.innerHTML = `
-            <div class="error-message">
-                ${error.message}
-            </div>
-        `;
-
-    }
-
-}
-
-
-// =========================================================
-// INITIAL BOOKING LOAD
-// =========================================================
-
-document.addEventListener(
-    "DOMContentLoaded",
     () => {
-
-        loadCities();
-
-        loadBookings();
-
+      // ლოკალურად ამოვშალოთ მეხსიერებიდან
+      cachedBookings = cachedBookings.filter((b) => String(b.id || b.bookingId || b.booking_id) !== String(bookingId));
+      renderBookingsTable(currentFilterCity);
+      renderCities();
     }
-);
+  );
+}
+
+function renderBookingsTable(filterCity = "all") {
+  if (!container) return;
+
+  const filtered = cachedBookings.filter((booking) => {
+    if (!filterCity || filterCity === "all") return true;
+    const city = String(booking.city || booking.hotel?.city || booking.hotelCity || "").toLowerCase();
+    return city === filterCity.toLowerCase();
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="no-data" style="padding:40px; text-align:center; color:#777;">ჯავშნები ვერ მოიძებნა.</div>`;
+    return;
+  }
+
+  let html = `
+    <div class="table-responsive">
+      <table class="booking-table">
+        <thead>
+          <tr>
+            <th>Hotel</th>
+            <th>Room</th>
+            <th class="Customer">Customer</th>
+            <th>Status</th>
+            <th>Check in</th>
+            <th>Check out</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  filtered.forEach((booking) => {
+    const hotel = createHotelFromBooking(booking);
+    const room = createRoomFromBooking(booking);
+    const bookingId = booking.id || booking.bookingId || booking.booking_id;
+    const customerName = booking.customerName || booking.customer_name || booking.name || "Unknown";
+    const checkIn = booking.checkInDate || booking.check_in_date || booking.checkIn || booking.fromDate;
+    const checkOut = booking.checkOutDate || booking.check_out_date || booking.checkOut || booking.toDate;
+    const totalPrice = booking.totalPrice || booking.total_price || booking.price || 0;
+    const status = getBookingStatus(booking);
+
+    html += `
+      <tr>
+        <td class="tdhotel">${renderHotelCell(hotel)}</td>
+        <td>${renderRoomCell(room)}</td>
+        <td class="ucnobi">${customerName}</td>
+        <td><div class="booked">${status}</div></td>
+        <td>${formatDate(checkIn)}</td>
+        <td>${formatDate(checkOut)}</td>
+        <td>${formatPrice(totalPrice)}</td>
+        <td style="text-align:center;">
+          <button type="button" class="cancel cancel-booking" data-booking-id="${bookingId}">
+            Cancel
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</tbody></table></div>`;
+  container.innerHTML = html;
+
+  container.querySelectorAll(".cancel-booking, .cancel").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      cancelBooking(btn.dataset.bookingId);
+    });
+  });
+}
+
+function renderCities() {
+  if (!citiesContainer) return;
+
+  const cities = [
+    ...new Set(
+      cachedBookings
+        .map((b) => b.city || b.hotel?.city || b.hotelCity)
+        .filter(Boolean)
+        .map((c) => String(c).trim())
+    )
+  ].sort();
+
+  citiesContainer.innerHTML = `
+    <div class="inbox">
+      <div class="city-item ${currentFilterCity === "all" ? "active" : ""}" data-city="all">All</div>
+      ${cities.map((city) => `<div class="city-item ${currentFilterCity === city ? "active" : ""}" data-city="${city}">${city}</div>`).join("")}
+    </div>
+  `;
+
+  citiesContainer.querySelectorAll(".city-item").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      currentFilterCity = this.getAttribute("data-city");
+      citiesContainer.querySelectorAll(".city-item").forEach((el) => el.classList.remove("active"));
+      this.classList.add("active");
+      renderBookingsTable(currentFilterCity);
+    });
+  });
+}
+
+async function loadBookings() {
+  if (!container) return;
+  const token = getToken();
+
+  if (!token) {
+    container.innerHTML = `
+      <div style="text-align:center; padding: 40px;">
+        <p style="font-size:18px; color:#555;">გთხოვთ გაიაროთ ავტორიზაცია ჯავშნების სანახავად.</p>
+        <button type="button" class="auth-choice-btn" style="margin-top:15px; padding:10px 20px;" id="inlineLoginBtn">Login</button>
+      </div>
+    `;
+    document.getElementById("inlineLoginBtn")?.addEventListener("click", openAuthPopup);
+    return;
+  }
+
+  if (statusDiv) statusDiv.textContent = "იტვირთება ჯავშნები...";
+
+  try {
+    const res = await fetch(BOOKINGS_API, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (res.status === 401) {
+      localStorage.removeItem("token");
+      updateAuthButton();
+      throw new Error("ავტორიზაციის ვადა გავიდა.");
+    }
+
+    if (!res.ok) throw new Error("ჯავშნები ვერ ჩაიტვირთა.");
+
+    const data = await res.json();
+    cachedBookings = Array.isArray(data) ? data : data.bookings || [];
+
+    if (statusDiv) statusDiv.textContent = "";
+
+    renderCities();
+    renderBookingsTable(currentFilterCity);
+  } catch (err) {
+    if (statusDiv) statusDiv.textContent = "";
+    container.innerHTML = `<div class="error-message" style="color:red; text-align:center; padding:30px;">${err.message}</div>`;
+  }
+}
+
+// ჯავშნების გაშვება მხოლოდ შესაბამის გვერდზე
+document.addEventListener("DOMContentLoaded", () => {
+  if (container || citiesContainer) {
+    loadBookings();
+  }
+});

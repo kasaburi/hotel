@@ -1,631 +1,310 @@
-const hamburger =
-  document.getElementById("hamburger");
+document.addEventListener("DOMContentLoaded", () => {
+  // ==========================================
+  // 1. DOM ელემენტები
+  // ==========================================
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("navLinks");
+  const authPopup = document.getElementById("authPopup");
+  const authContent = document.getElementById("authContent");
+  const popupContent = document.querySelector(".auth-popup-content");
+  const btnClose = document.getElementById("btnClose");
+  const desktopLogin = document.getElementById("btnLoginRegister");
+  const section = document.getElementById("section");
+  const cityContainer = document.getElementById("city");
 
-const navLinks =
-  document.getElementById("navLinks");
+  // API მისამართები (ორივე ბაზა)
+  const RENDER_ROOMS_API = "https://hotel-backend-qeue.onrender.com/api/Rooms/GetAll";
+  const STEP_ROOMS_API = "https://hotelbooking.stepprojects.ge/api/Rooms/GetAll";
+  const STEP_CITIES_API = "https://hotelbooking.stepprojects.ge/api/Hotels/GetCities";
 
-const overlay =
-  document.createElement("div");
+  // ==========================================
+  // 2. მობილური მენიუ (OVERLAY)
+  // ==========================================
+  const overlay = document.createElement("div");
+  overlay.classList.add("nav-overlay");
+  overlay.innerHTML = `
+    <a href="./index.html">Home</a>
+    <a href="./rooms.html">Rooms</a>
+    <a href="./hotel.html">Hotels</a>
+    <a href="./bookedrooms.html">Booked Rooms</a>
+    <button type="button" id="mobileLogin">
+      <span>Login</span>
+      <img src="./image/login.svg" class="login" alt="Login">
+    </button>
+  `;
+  document.body.appendChild(overlay);
 
-overlay.classList.add("nav-overlay");
+  const mobileLogin = overlay.querySelector("#mobileLogin");
 
-overlay.innerHTML = `
-  <a href="./index.html">Home</a>
-  <a href="./rooms.html">Rooms</a>
-  <a href="./hotel.html">Hotels</a>
-  <a href="./bookedrooms.html">Booked Rooms</a>
-
-  <button type="button" id="mobileLogin">
-    Login
-    <img src="./image/login.svg" class="login">
-  </button>
-`;
-
-document.body.appendChild(overlay);
-
-
-// ==========================================
-// HAMBURGER OPEN
-// ==========================================
-
-if (hamburger) {
-
-  hamburger.addEventListener("click", () => {
-
-    hamburger.style.display = "none";
-
-    overlay.classList.add("active");
-
-  });
-
-}
-
-
-// ==========================================
-// MOBILE LOGIN
-// ==========================================
-
-const mobileLogin =
-  document.getElementById("mobileLogin");
-
-const desktopLogin =
-  document.getElementById("btnLoginRegister");
-
-const authPopup =
-  document.getElementById("authPopup");
-
-const btnClose =
-  document.getElementById("btnClose");
-
-
-// Login popup-ის გახსნის ფუნქცია
-function openAuthPopup() {
-
-  if (authPopup) {
-
-    authPopup.classList.add("active");
-
+  if (hamburger) {
+    hamburger.addEventListener("click", () => {
+      hamburger.style.display = "none";
+      overlay.classList.add("active");
+    });
   }
 
-}
+  function closeMobileMenu() {
+    overlay.classList.remove("active");
+    if (hamburger) hamburger.style.display = "block";
+  }
 
+  overlay.addEventListener("click", (event) => {
+    if (event.target.closest("#mobileLogin")) return;
+    closeMobileMenu();
+  });
 
-// Desktop Login
-if (desktopLogin) {
+  // ==========================================
+  // 3. ავტორიზაცია & LOGIN POPUP
+  // ==========================================
+  function getToken() {
+    return localStorage.getItem("token") || localStorage.getItem("userToken");
+  }
 
-  desktopLogin.addEventListener(
-    "click",
-    openAuthPopup
-  );
+  function openAuthPopup() {
+    closeMobileMenu();
+    if (!authPopup) return;
 
-}
+    authPopup.style.display = "flex";
+    authPopup.classList.add("active");
 
-
-// Mobile Login
-if (mobileLogin) {
-
-  mobileLogin.addEventListener(
-    "click",
-    () => {
-
-      // hamburger მენიუს დახურვა
-      overlay.classList.remove("active");
-
-      if (hamburger) {
-        hamburger.style.display = "block";
-      }
-
-      // Login popup-ის გახსნა
-      openAuthPopup();
-
+    if (popupContent) {
+      popupContent.classList.remove("registration-popup", "authorization-popup");
     }
-  );
 
-}
+    if (authContent) {
+      authContent.innerHTML = `
+        <div class="auth-choice">
+          <div class="go">
+            Login
+            <img src="./image/login.svg" class="login" alt="Login">
+          </div>
+          <button type="button" id="popupLogin" class="auth-choice-btn">Authorization</button>
+          <button type="button" id="popupRegister" class="auth-choice-btn">Registration</button>
+        </div>
+      `;
 
-
-// ==========================================
-// POPUP CLOSE
-// ==========================================
-
-if (btnClose) {
-
-  btnClose.addEventListener(
-    "click",
-    () => {
-
-      authPopup.classList.remove("active");
-
-    }
-  );
-
-}
-
-
-
-
-
-
-
-let section = document.getElementById("section");
-
-function getAll() {
-  fetch("https://hotel-backend-qeue.onrender.com/api/Rooms/GetAll")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (!section) return; 
-
-      let sortedRooms = data.sort((a, b) => (b.reservationCount || 0) - (a.reservationCount || 0));
-      let top6Rooms = sortedRooms.slice(0, 6);
-
-      section.innerHTML = "";
-
-      top6Rooms.forEach(item => {
-        section.innerHTML += cardPrint(item);
+      document.getElementById("popupLogin")?.addEventListener("click", () => {
+        closePopup();
+        window.location.href = "./singin.html";
       });
 
-      const cards = section.querySelectorAll(".card");
-      cards.forEach(card => {
-        const img = card.querySelector(".img");
-        const button = card.querySelector(".button");
+      document.getElementById("popupRegister")?.addEventListener("click", () => {
+        closePopup();
+        window.location.href = "./registre.html";
+      });
+    }
+  }
 
+  function closePopup() {
+    if (!authPopup) return;
+    authPopup.style.display = "none";
+    authPopup.classList.remove("active");
+    if (authContent) authContent.innerHTML = "";
+    if (popupContent) popupContent.classList.remove("registration-popup", "authorization-popup");
+  }
+
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userEmail");
+    updateAuthButton();
+    window.location.href = "./index.html";
+  }
+
+  function updateAuthButton() {
+    const isAuth = !!getToken();
+    const btnText = isAuth ? "Log Out" : "Login";
+
+    if (desktopLogin) {
+      desktopLogin.innerHTML = `
+        ${btnText}
+        <img src="./image/login.svg" class="login" alt="${btnText}">
+      `;
+      desktopLogin.onclick = isAuth ? logout : openAuthPopup;
+    }
+
+    if (mobileLogin) {
+      mobileLogin.innerHTML = `
+        <span>${btnText}</span>
+        <img src="./image/login.svg" class="login" alt="${btnText}">
+      `;
+      mobileLogin.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isAuth) {
+          logout();
+        } else {
+          closeMobileMenu();
+          openAuthPopup();
+        }
+      };
+    }
+  }
+
+  btnClose?.addEventListener("click", closePopup);
+  authPopup?.addEventListener("click", (e) => {
+    if (e.target === authPopup) closePopup();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePopup();
+  });
+
+  updateAuthButton();
+
+  // ==========================================
+  // 4. ოთახების გამოტანა (ქეშით & სარეზერვო ბაზით)
+  // ==========================================
+  function cardPrint(room) {
+    const firstImage = room.images?.[0]?.source || "https://via.placeholder.com/300";
+    return `
+      <div class="card">
+        <img src="${firstImage}" class="img" alt="${room.name || "Room"}">
+        <div class="cardbody">
+          <h5 class="name">${room.name || "Room"}</h5>
+          <p class="text">&euro;${room.pricePerNight ?? 0} <span class="night">a night</span></p>
+        </div>
+        <button class="button" style="display: none; margin-bottom: 10px;">
+          <a href="./booknow.html?roomId=${room.id}" class="book">Book Now</a>
+        </button>
+      </div>
+    `;
+  }
+
+  function renderRooms(rooms) {
+    if (!section) return;
+    section.innerHTML = rooms.map(cardPrint).join("");
+
+    section.querySelectorAll(".card").forEach((card) => {
+      const img = card.querySelector(".img");
+      const button = card.querySelector(".button");
+
+      if (img && button) {
         card.addEventListener("mouseenter", () => {
           img.style.display = "none";
           button.style.display = "inline-block";
         });
-
         card.addEventListener("mouseleave", () => {
           img.style.display = "block";
           button.style.display = "none";
         });
-      });
-    })
-    .catch(error => {
-      console.error("Error fetching rooms:", error);
-      if (section) section.innerHTML = "<p>Loading failed.</p>";
+      }
     });
-}
-
-function cardPrint(room) {
-  let firstImage = room.images[0]?.source || "https://via.placeholder.com/300";
-  return `
-    <div class="card">
-      <img src="${firstImage}" class="img" alt="${room.name}">
-      <div class="cardbody">
-        <h5 class="name">${room.name}</h5>
-        <p class="text">&euro;${room.pricePerNight} <span class="night">a night</span></p>
-      </div>
-      <button class="button" style="display: none; margin-bottom: 10px;">
-        <a href="./booknow.html?roomId=${room.id}" class="book">Book Now</a>
-      </button>
-    </div>
-  `;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const cityContainer = document.getElementById("city");
-
-  if (cityContainer) {
-    fetch("https://hotelbooking.stepprojects.ge/api/Hotels/GetCities")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Unable to load cities.");
-        }
-        return response.json();
-      })
-      .then(cities => {
-        cityContainer.innerHTML = "";
-
-        cities.forEach(city => {
-          const cityBtn = document.createElement("button");
-          cityBtn.textContent = city;
-          cityBtn.classList.add("city-btn");
-
-          cityBtn.addEventListener("click", () => {
-            const token = localStorage.getItem("userToken");
-            if (!token) {
-              openAuthPopup();
-            } else {
-              console.log("The chosen city is:", city);
-         
-            }
-          });
-
-          cityContainer.appendChild(cityBtn);
-        });
-      })
-      .catch(error => {
-        console.error("error:", error);
-        cityContainer.innerHTML = "<p style='color:red;'>Unable to load cities.</p>";
-      });
   }
-});
 
-document.querySelector(".read")?.addEventListener("click", function (e) {
-  e.preventDefault();
-  const target = document.getElementById("read");
-  target?.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+  async function getAll() {
+    if (!section) return;
 
-
-getAll();
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const btnLoginRegister =
-        document.getElementById("btnLoginRegister");
-
-    const popup =
-        document.getElementById("authPopup");
-
-    const authContent =
-        document.getElementById("authContent");
-
-    const btnClose =
-        document.getElementById("btnClose");
-
-
-    // ==========================================
-    // CHECK ELEMENTS
-    // ==========================================
-
-    if (!popup || !authContent || !btnClose) {
-
-        console.error(
-            "❌ Required elements for login popup not found"
-        );
-
-        return;
+    // 1. თუ ქეშში გვაქვს, გამოვიტანოთ ეგრევე 0 წამში!
+    const cached = localStorage.getItem("cached_top6_rooms");
+    if (cached) {
+      try {
+        renderRooms(JSON.parse(cached));
+      } catch (e) {
+        console.error("Cache error", e);
+      }
+    } else {
+      section.innerHTML = "<p style='text-align:center; padding:30px;'>Loading rooms, please wait...</p>";
     }
 
+    // 2. ვცადოთ Render ბაზიდან წამოღება, ხოლო თუ გათიშულია -> Step-ის ბაზიდან
+    try {
+      let data = null;
 
-    // ==========================================
-    // POPUP CONTENT
-    // ==========================================
+      try {
+        const res = await fetch(RENDER_ROOMS_API);
+        if (res.ok) data = await res.json();
+      } catch (renderErr) {
+        console.warn("Render base sleeping or failed, switching to Step base...", renderErr);
+      }
 
-    const popupContent =
-        document.querySelector(".auth-popup-content");
+      // თუ Render-მა ვერ დააბრუნა, მივმართოთ Step-ის ბაზას
+      if (!data) {
+        const stepRes = await fetch(STEP_ROOMS_API);
+        if (!stepRes.ok) throw new Error("Both databases failed to load rooms");
+        data = await stepRes.json();
+      }
 
+      const roomsList = Array.isArray(data) ? data : data.rooms || [];
+      const top6Rooms = roomsList
+        .sort((a, b) => (b.reservationCount || 0) - (a.reservationCount || 0))
+        .slice(0, 6);
 
-    // ==========================================
-    // OPEN LOGIN / REGISTER POPUP
-    // ==========================================
+      // განვაახლოთ ქეში და ეკრანი
+      localStorage.setItem("cached_top6_rooms", JSON.stringify(top6Rooms));
+      renderRooms(top6Rooms);
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+      if (!cached) {
+        section.innerHTML = "<p style='color:red; text-align:center;'>Loading failed. Please refresh.</p>";
+      }
+    }
+  }
 
-    function openAuthPopup() {
+  getAll();
 
-        popup.style.display = "flex";
+  // ==========================================
+  // 5. ქალაქების გამოტანა (CITIES)
+  // ==========================================
+  async function loadCities() {
+    if (!cityContainer) return;
 
-
-        // საწყის მდგომარეობაზე დაბრუნება
-
-        popupContent.classList.remove(
-            "registration-popup",
-            "authorization-popup"
-        );
-
-
-        // ======================================
-        // POPUP BUTTONS
-        // ======================================
-
-        authContent.innerHTML = `
-
-            <div class="auth-choice">
-
-                <div class="go">
-                    Login
-
-                    <img
-                        src="./image/login.svg"
-                        class="login"
-                        alt="Login"
-                    >
-                </div>
-
-
-                <button
-                    type="button"
-                    id="popupLogin"
-                    class="auth-choice-btn">
-
-                    Authorization
-
-                </button>
-
-
-                <button
-                    type="button"
-                    id="popupRegister"
-                    class="auth-choice-btn">
-
-                    Registration
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        // ======================================
-        // AUTHORIZATION BUTTON
-        // ======================================
-
-        const popupLogin =
-            document.getElementById("popupLogin");
-
-
-        if (popupLogin) {
-
-            popupLogin.addEventListener("click", () => {
-
-                // popup-ის დახურვა
-                closePopup();
-
-                // Authorization გვერდზე გადასვლა
-                window.location.href =
-                    "./singin.html";
-
-            });
-
-        }
-
-
-        // ======================================
-        // REGISTRATION BUTTON
-        // ======================================
-
-        const popupRegister =
-            document.getElementById("popupRegister");
-
-
-        if (popupRegister) {
-
-            popupRegister.addEventListener("click", () => {
-
-                // popup-ის დახურვა
-                closePopup();
-
-                // Registration გვერდზე გადასვლა
-                window.location.href =
-                    "./registre.html";
-
-            });
-
-        }
-
+    // ქეშიდან გამოტანა
+    const cachedCities = localStorage.getItem("cached_cities");
+    if (cachedCities) {
+      try {
+        renderCities(JSON.parse(cachedCities));
+      } catch (e) {}
     }
 
+    try {
+      const response = await fetch(STEP_CITIES_API);
+      if (!response.ok) throw new Error("Unable to load cities.");
 
-    // ==========================================
-    // LOGIN / LOGOUT BUTTON
-    // ==========================================
-
-    function updateAuthButton() {
-
-        const token =
-            localStorage.getItem("token");
-
-
-        // ======================================
-        // USER IS LOGGED IN
-        // ======================================
-
-        if (token) {
-
-            if (btnLoginRegister) {
-
-                btnLoginRegister.innerHTML = `
-
-                    Log Out
-
-                    <img
-                        src="./image/login.svg"
-                        class="login"
-                        alt="Log Out"
-                    >
-
-                `;
-
-
-                // ძველი click event-ის თავიდან აცილება
-
-                btnLoginRegister.onclick = null;
-
-
-                btnLoginRegister.onclick = () => {
-
-                    logout();
-
-                };
-
-            }
-
-        }
-
-
-        // ======================================
-        // USER IS NOT LOGGED IN
-        // ======================================
-
-        else {
-
-            if (btnLoginRegister) {
-
-                btnLoginRegister.innerHTML = `
-
-                    Login
-
-                    <img
-                        src="./image/login.svg"
-                        class="login"
-                        alt="Login"
-                    >
-
-                `;
-
-
-                btnLoginRegister.onclick = () => {
-
-                    openAuthPopup();
-
-                };
-
-            }
-
-        }
-
+      const cities = await response.json();
+      localStorage.setItem("cached_cities", JSON.stringify(cities));
+      renderCities(cities);
+    } catch (error) {
+      console.error("Cities error:", error);
+      if (!cachedCities) {
+        cityContainer.innerHTML = "<p style='color:red;'>Unable to load cities.</p>";
+      }
     }
+  }
 
+  function renderCities(cities) {
+    if (!cityContainer || !Array.isArray(cities)) return;
+    cityContainer.innerHTML = "";
 
-    // ==========================================
-    // LOG OUT
-    // ==========================================
+    const fragment = document.createDocumentFragment();
 
-    function logout() {
+    cities.forEach((city) => {
+      const cityBtn = document.createElement("button");
+      cityBtn.textContent = city;
+      cityBtn.classList.add("city-btn");
 
-        // JWT token-ის წაშლა
-        localStorage.removeItem("token");
-
-        // User ID-ის წაშლა
-        localStorage.removeItem("userId");
-
-        // User Email-ის წაშლა
-        localStorage.removeItem("userEmail");
-
-
-        console.log(
-            "✅ User successfully logged out"
-        );
-
-
-        // ღილაკის დაბრუნება Login-ზე
-        updateAuthButton();
-
-
-        // მთავარ გვერდზე დაბრუნება
-        window.location.href =
-            "./index.html";
-
-    }
-
-
-    // ==========================================
-    // DESKTOP LOGIN / LOGOUT BUTTON
-    // ==========================================
-
-    updateAuthButton();
-
-
-    // ==========================================
-    // MOBILE LOGIN / LOGOUT BUTTON
-    // ==========================================
-
-    document.addEventListener("click", (event) => {
-
-        const mobileButton =
-            event.target.closest("#mobileLogin");
-
-
-        if (!mobileButton) {
-            return;
+      cityBtn.addEventListener("click", () => {
+        if (!getToken()) {
+          openAuthPopup();
+        } else {
+          console.log("The chosen city is:", city);
         }
+      });
 
-
-        const token =
-            localStorage.getItem("token");
-
-
-        // ======================================
-        // MOBILE LOG OUT
-        // ======================================
-
-        if (token) {
-
-            logout();
-
-            return;
-
-        }
-
-
-        // ======================================
-        // MOBILE LOGIN
-        // ======================================
-
-        openAuthPopup();
-
+      fragment.appendChild(cityBtn);
     });
 
+    cityContainer.appendChild(fragment);
+  }
 
-    // ==========================================
-    // CLOSE BUTTON
-    // ==========================================
+  loadCities();
 
-    btnClose.addEventListener("click", () => {
-
-        closePopup();
-
-    });
-
-
-    // ==========================================
-    // CLOSE FUNCTION
-    // ==========================================
-
-    function closePopup() {
-
-        popup.style.display = "none";
-
-        authContent.innerHTML = "";
-
-
-        popupContent.classList.remove(
-            "registration-popup",
-            "authorization-popup"
-        );
-
-    }
-
-
-    // ==========================================
-    // CLICK OUTSIDE POPUP
-    // ==========================================
-
-    popup.addEventListener("click", (event) => {
-
-        if (event.target === popup) {
-
-            closePopup();
-
-        }
-
-    });
-
-
-    // ==========================================
-    // ESC KEY
-    // ==========================================
-
-    document.addEventListener("keydown", (event) => {
-
-        if (event.key === "Escape") {
-
-            closePopup();
-
-        }
-
-    });
-
+  // ==========================================
+  // 6. SMOOTH SCROLL (.read -> #read)
+  // ==========================================
+  document.querySelector(".read")?.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = document.getElementById("read");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 });
